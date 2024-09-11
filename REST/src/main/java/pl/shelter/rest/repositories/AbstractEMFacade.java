@@ -20,15 +20,6 @@ public abstract class AbstractEMFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    // Modyfikator dostępu wszystkich metod AbstractFacade został zmieniony na protected
-    // To powoduje, że każda metoda konkretnej fasady, która ma byc użyta, musi być w niej jawnie nadpisana jako publiczna.
-    // To z kolei wymusza zastosowanie dla takiej metody @Transactional, i to jest właśnie cel.
-    // Niestety w ten sposób tracimy korzyści ze stosowania typu generycznego. Typowy trade off.
-
-    // Metody wykonujące operacje modyfikujące dane wywołują także metodę flush().
-    // To wymusza zrealizowanie odłożonych przez PersistenceContext operacji w ramach jej wywołania
-    // Uzywamy tego, aby wymusić rzucenie ewentualnych wyjątków w ramach danej metody fasady
-    // co pozwala na ich złapanie
 
 
     protected void create(T entity) {
@@ -50,7 +41,7 @@ public abstract class AbstractEMFacade<T> {
         return Optional.ofNullable(getEntityManager().find(entityClass, id));
     }
 
-    // Ta metoda dodatkowo wykonuje refresh(), czyli wymusza wczytanie z bazy aktualnych danych obiektu
+
     protected Optional<T> findAndRefresh(UUID id) {
         Optional<T> entity = find(id);
         if(entity.isPresent()) {

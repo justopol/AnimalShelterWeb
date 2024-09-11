@@ -6,9 +6,11 @@ import jakarta.transaction.Transactional;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.animals.Animal;
 
-@TxTracked // To track transactions and method calls
-@Transactional(Transactional.TxType.MANDATORY) // To manage application transaction boundaries
-public class AnimalFacade extends  AbstractEMFacade<Animal> {
+import java.util.List;
+
+@TxTracked
+@Transactional(Transactional.TxType.MANDATORY)
+public class AnimalFacade extends AbstractEMFacade<Animal> {
 
     @PersistenceContext
     private EntityManager em;
@@ -24,5 +26,9 @@ public class AnimalFacade extends  AbstractEMFacade<Animal> {
 
     public void create(Animal animal) {
         super.create(animal);
+    }
+
+    public List<Animal> getAnimals() {
+        return super.findAll();
     }
 }
