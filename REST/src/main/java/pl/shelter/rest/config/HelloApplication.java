@@ -1,4 +1,4 @@
-package pl.shelter.rest;
+package pl.shelter.rest.config;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

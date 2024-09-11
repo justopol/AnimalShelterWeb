@@ -1,4 +1,4 @@
-package pl.shelter.rest;
+package pl.shelter.rest.endpoints;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
