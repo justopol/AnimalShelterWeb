@@ -9,7 +9,7 @@ public class AnimalFacade extends  AbstractEMFacade<Animal> {
     @PersistenceContext
     private EntityManager em;
 
-    public AnimalFacade(Class<Animal> entityClass) {
+    public AnimalFacade() {
         super(Animal.class);
     }
 
