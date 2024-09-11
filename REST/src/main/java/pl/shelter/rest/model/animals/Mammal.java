@@ -1,9 +1,11 @@
 package pl.shelter.rest.model.animals;
 
+import jakarta.persistence.Entity;
 import pl.shelter.rest.model.AbstractEntity;
 import pl.shelter.rest.model.enums.AdoptionStatus;
 import pl.shelter.rest.model.enums.Bloodness;
 
+@Entity
 public class Mammal extends Animal {
     public Mammal() {}
 

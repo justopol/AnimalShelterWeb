@@ -1,11 +1,16 @@
 package pl.shelter.rest.model.animals;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import pl.shelter.rest.model.AbstractEntity;
 import pl.shelter.rest.model.enums.AdoptionStatus;
 import pl.shelter.rest.model.enums.Bloodness;
 
 import java.util.UUID;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Animal extends AbstractEntity {
     private boolean available;
     private double basicPrice = 20;

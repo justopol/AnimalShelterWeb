@@ -24,7 +24,12 @@ public class HelloResource {
         mammal.setName("Gofer");
         mammal.setAge(8);
 
-        animalService.createAnimal(mammal);
+        try {
+            animalService.createAnimal(mammal);
+        }
+        catch (Exception ex){
+            System.out.println("error");
+        }
         return "Hello, World!";
     }
 }
