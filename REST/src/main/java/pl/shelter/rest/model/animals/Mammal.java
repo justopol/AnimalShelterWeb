@@ -8,6 +8,11 @@ import pl.shelter.rest.model.enums.Bloodness;
 public class Mammal extends Animal {
     public Mammal() {}
 
+    public Mammal(String type, int age, String name, boolean castrated) {
+        super(type, age, name);
+        this.castrated = castrated;
+    }
+
     @Override
     protected Bloodness getBloodness() {
         return Bloodness.WARM;

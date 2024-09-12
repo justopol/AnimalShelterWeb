@@ -12,6 +12,9 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Animal extends AbstractEntity {
+    private String type;
+
+
     private boolean available;
     private double basicPrice = 20;
 
@@ -24,6 +27,12 @@ public abstract class Animal extends AbstractEntity {
     public Animal() {
         super(UUID.randomUUID());
     }
+    public Animal(String type, int age, String name) {
+        super(UUID.randomUUID());
+        this.type = type;
+        this.age = age;
+        this.name = name;
+    }
 
     protected abstract Bloodness getBloodness();
 
@@ -34,6 +43,13 @@ public abstract class Animal extends AbstractEntity {
 
     public void setAdoptionStatus(AdoptionStatus adoptionStatus) {
         this.adoptionStatus = adoptionStatus;
+    }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     public String getName() {
         return name;
