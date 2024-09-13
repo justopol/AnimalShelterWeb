@@ -39,20 +39,24 @@ public class AnimalManager implements AnimalService {
     }
 
     private void editMammal(long originalVersion, Mammal mammalModifications, Mammal modifiedMammal) {
-        if (originalVersion != modifiedMammal.getVersion())
-            throw AppBaseException.createForOptimisticLock();
-
-        if (null != mammalModifications.getType()) {
-            modifiedMammal.setType(mammalModifications.getType());
-        }
-
-        modifiedMammal.setAge(mammalModifications.getAge());
-
-        if (null != mammalModifications.getName()) {
-            modifiedMammal.setName(mammalModifications.getName());
-        }
+        editAnimal(originalVersion, mammalModifications, modifiedMammal);
         modifiedMammal.setCastrated(mammalModifications.isCastrated());
         animalFacade.edit(modifiedMammal);
+    }
+
+    private static void editAnimal(long originalVersion, Animal animalModifications, Animal modifiedAnimal) {
+        if (originalVersion != modifiedAnimal.getVersion())
+            throw AppBaseException.createForOptimisticLock();
+
+        if (null != animalModifications.getType()) {
+            modifiedAnimal.setType(animalModifications.getType());
+        }
+
+        modifiedAnimal.setAge(animalModifications.getAge());
+
+        if (null != animalModifications.getName()) {
+            modifiedAnimal.setName(animalModifications.getName());
+        }
     }
 
 
