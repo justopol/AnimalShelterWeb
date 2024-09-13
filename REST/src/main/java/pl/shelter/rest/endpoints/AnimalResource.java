@@ -24,27 +24,26 @@ public class AnimalResource {
     }
 
     @POST
+    @Path("mammal")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces("text/plain")
-    public String createMammal(AddMammalCmd addMammalCmd) {
+    public void createMammal(AddMammalCmd addMammalCmd) {
        Animal newMammal = AnimalConverter.fromAddMammalCmd(addMammalCmd);
-
         try {
             animalService.createAnimal(newMammal);
         } catch (Exception ex) {
             System.out.println("error");
         }
-        return "post:Hello, World!";
     }
 
     @GET
+    @Path("mammal")
     @Produces(MediaType.APPLICATION_JSON)
     public List<MammalDto> getAnimal() {
        return AnimalConverter.toDto(animalService.getAnimals());
 
     }
     @PUT
-    @Path("{id}")
+    @Path("mammal/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateAnimal(@PathParam("id") UUID id,
                              EditMammalCmd editMammalCmd) {
