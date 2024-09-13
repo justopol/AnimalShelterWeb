@@ -6,6 +6,7 @@ import pl.shelter.rest.model.enums.Bloodness;
 
 @Entity
 public class Mammal extends Animal {
+    private boolean castrated;
     public Mammal() {}
 
     public Mammal(String type, int age, String name, boolean castrated) {
@@ -21,12 +22,12 @@ public class Mammal extends Animal {
     @Override
     public boolean isReadyForAdoption() {
         if (castrated && adoptionStatus.equals(AdoptionStatus.FOR_ADOPTION)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    private boolean castrated;
+
 
     public boolean isCastrated() {
         return castrated;

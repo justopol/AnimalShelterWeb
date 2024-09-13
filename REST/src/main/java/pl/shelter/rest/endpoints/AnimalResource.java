@@ -1,12 +1,11 @@
 package pl.shelter.rest.endpoints;
 
 import jakarta.inject.Inject;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.animals.AddMammalCmd;
 import pl.shelter.dto.animals.EditMammalCmd;
+import pl.shelter.dto.animals.MammalDto;
 import pl.shelter.rest.converters.AnimalConverter;
 import pl.shelter.rest.managers.AnimalService;
 import pl.shelter.rest.model.animals.Animal;
@@ -40,13 +39,9 @@ public class AnimalResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Animal> getAnimal() {
-        try {
-            return animalService.getAnimals();
-        } catch (Exception ex) {
-            System.out.println("error");
-        }
-        return null;
+    public List<MammalDto> getAnimal() {
+       return AnimalConverter.toDto(animalService.getAnimals());
+
     }
     @PUT
     @Path("{id}")
