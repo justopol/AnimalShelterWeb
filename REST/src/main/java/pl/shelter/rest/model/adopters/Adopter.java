@@ -7,9 +7,14 @@ import pl.shelter.rest.model.accounts.PersonalId;
 import java.util.UUID;
 
 @Entity
+@DiscriminatorValue("ADOPTER")
+@SecondaryTable(name = "adopter")
 public class Adopter extends Account {
+    @Enumerated(EnumType.STRING)
+    @Column(table = "adopter")
     private AdopterType adopterType;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(table = "adopter", updatable = false, nullable = false)
     private Address address;
 
     public Adopter() {
@@ -23,6 +28,18 @@ public class Adopter extends Account {
 
     public AdopterType getAdopterType() {
         return adopterType;
+    }
+
+    public void setAdopterType(AdopterType adopterType) {
+        this.adopterType = adopterType;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public double getDiscount() {
