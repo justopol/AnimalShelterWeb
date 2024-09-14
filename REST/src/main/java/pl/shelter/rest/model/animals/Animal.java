@@ -1,9 +1,8 @@
 package pl.shelter.rest.model.animals;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 import pl.shelter.rest.model.AbstractEntity;
+import pl.shelter.rest.model.adoptions.Adoption;
 import pl.shelter.rest.model.enums.AdoptionStatus;
 import pl.shelter.rest.model.enums.Bloodness;
 
@@ -20,6 +19,9 @@ public abstract class Animal extends AbstractEntity {
 
     private  String name;
     private int age;
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    private Adoption currentAdoption;
+
 
     protected AdoptionStatus adoptionStatus = AdoptionStatus.FOR_ADOPTION;
 
@@ -79,15 +81,15 @@ public abstract class Animal extends AbstractEntity {
     }
 
 
-//    public void addAdoption(Adoption adoption) {
-//        this.currentAdoption = adoption;
-//    }
-//
-//    public void removeAdoption() {
-//        this.currentAdoption = null;
-//    }
-//
-//    public Adoption getCurrentAdoption() {
-//        return currentAdoption;
-//    }
+    public void addAdoption(Adoption adoption) {
+        this.currentAdoption = adoption;
+    }
+
+    public void removeAdoption() {
+        this.currentAdoption = null;
+    }
+
+    public Adoption getCurrentAdoption() {
+        return currentAdoption;
+    }
 }

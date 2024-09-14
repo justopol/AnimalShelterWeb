@@ -2,10 +2,11 @@ package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import pl.shelter.rest.exceptions.AppBaseException;
+import pl.shelter.rest.exceptions.persistence.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.model.animals.Mammal;
+import pl.shelter.rest.model.animals.Reptile;
 import pl.shelter.rest.repositories.AnimalFacade;
 
 import java.util.List;
@@ -35,13 +36,29 @@ public class AnimalManager implements AnimalService {
 
     @Override
     public Mammal findMammalById(UUID id) {
-        return (Mammal)animalFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
+        return (Mammal) animalFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
+    }
+
+    @Override
+    public Reptile findReptileById(UUID id) {
+        return (Reptile) animalFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
+    }
+
+    @Override
+    public void editReptileById(UUID id, long originalVersion, Reptile reptileModifications) {
+        Reptile modificateReptile = findReptileById(id);
+        editReptile(originalVersion, reptileModifications, modificateReptile);
     }
 
     private void editMammal(long originalVersion, Mammal mammalModifications, Mammal modifiedMammal) {
         editAnimal(originalVersion, mammalModifications, modifiedMammal);
         modifiedMammal.setCastrated(mammalModifications.isCastrated());
         animalFacade.edit(modifiedMammal);
+    }
+
+    private void editReptile(long originalVersion, Reptile reptileModifications, Reptile modifiedReptile) {
+        editAnimal(originalVersion, reptileModifications, modifiedReptile);
+        animalFacade.edit(modifiedReptile);
     }
 
     private static void editAnimal(long originalVersion, Animal animalModifications, Animal modifiedAnimal) {

@@ -3,13 +3,12 @@ package pl.shelter.rest.endpoints;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import pl.shelter.dto.animals.AddMammalCmd;
-import pl.shelter.dto.animals.EditMammalCmd;
-import pl.shelter.dto.animals.MammalDto;
+import pl.shelter.dto.animals.*;
 import pl.shelter.rest.converters.AnimalConverter;
 import pl.shelter.rest.managers.AnimalService;
 import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.model.animals.Mammal;
+import pl.shelter.rest.model.animals.Reptile;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,26 +27,37 @@ public class AnimalResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void createMammal(AddMammalCmd addMammalCmd) {
        Animal newMammal = AnimalConverter.fromAddMammalCmd(addMammalCmd);
-        try {
-            animalService.createAnimal(newMammal);
-        } catch (Exception ex) {
-            System.out.println("error");
-        }
+        animalService.createAnimal(newMammal);
     }
 
-    @GET
-    @Path("mammal")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<MammalDto> getAnimal() {
-       return AnimalConverter.toDto(animalService.getAnimals());
-
-    }
     @PUT
     @Path("mammal/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateAnimal(@PathParam("id") UUID id,
+    public void updateMammal(@PathParam("id") UUID id,
                              EditMammalCmd editMammalCmd) {
         Mammal MammalModifications = AnimalConverter.fromEditMammalCmd(editMammalCmd);
         animalService.editMammalById(id, editMammalCmd.getOriginalVersion(), MammalModifications);
+    }
+
+    @POST
+    @Path("reptile")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createReptile(AddReptileCmd addReptileCmd) {
+        Animal newReptile = AnimalConverter.fromAddReptileCmd(addReptileCmd);
+        animalService.createAnimal(newReptile);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<AnimalDto> getAnimal() {
+        return AnimalConverter.toDto(animalService.getAnimals());
+    }
+    @PUT
+    @Path("reptile/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateReptile(@PathParam("id") UUID id,
+                             EditReptileCmd editReptileCmd) {
+        Reptile ReptileModifications = AnimalConverter.fromEditReptileCmd(editReptileCmd);
+        animalService.editReptileById(id, editReptileCmd.getOriginalVersion(), ReptileModifications);
     }
 }

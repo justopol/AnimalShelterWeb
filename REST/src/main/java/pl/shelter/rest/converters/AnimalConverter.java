@@ -1,10 +1,9 @@
 package pl.shelter.rest.converters;
 
-import pl.shelter.dto.animals.AddMammalCmd;
-import pl.shelter.dto.animals.EditMammalCmd;
-import pl.shelter.dto.animals.MammalDto;
+import pl.shelter.dto.animals.*;
 import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.model.animals.Mammal;
+import pl.shelter.rest.model.animals.Reptile;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,11 +33,42 @@ public class AnimalConverter {
                 mammal.getAdoptionStatus().name(),
                 mammal.isCastrated());
     }
-    public static List<MammalDto> toDto(List<Animal> mammals) {
-        return (null == mammals ? null : mammals.stream()
+    public static ReptileDto toDto(Reptile reptile){
+        return new ReptileDto(reptile.getId(),
+                reptile.getVersion(),
+                reptile.getType(),
+                reptile.isReadyForAdoption(),
+                reptile.getName(),
+                reptile.getAge(),
+                reptile.getAdoptionPrice(),
+                reptile.getAdoptionStatus().name());
+    }
+    public static List<AnimalDto> toDto(List<Animal> animals) {
+        return (null == animals ? null : animals.stream()
                 .filter(Objects::nonNull)
-                .map(element -> toDto((Mammal) element))
+                .map(animal -> {
+                    //switch
+                    if (animal instanceof Mammal){
+                        return toDto((Mammal) animal);
+                    }
+                    else if(animal instanceof  Reptile){
+                        return toDto((Reptile) animal);
+                    }else {
+                    throw new IllegalArgumentException("Unsupported animal type: " + animal.getClass());}
+                })
                 .collect(Collectors.toList())
         );
     }
+    public static Animal fromAddReptileCmd(AddReptileCmd addReptileCmd) {
+        return new Reptile(addReptileCmd.getType(),
+                addReptileCmd.getAge(),
+                addReptileCmd.getName());
+    }
+
+    public static Reptile fromEditReptileCmd(EditReptileCmd editReptileCmd) {
+        return new Reptile(editReptileCmd.getType(),
+                editReptileCmd.getAge(),
+                editReptileCmd.getName());
+    }
+
 }
