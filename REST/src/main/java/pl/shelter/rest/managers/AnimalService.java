@@ -12,7 +12,6 @@ public interface AnimalService {
     void createAnimal(Animal animal);
     List<Animal> getAnimals();
     void editMammalById(UUID id, long originalVersion, Mammal mammalModifications);
-    Mammal findMammalById(UUID id);
-    Reptile findReptileById(UUID id);
+    Animal findAnimalById(UUID id);
     void editReptileById(UUID id, long originalVersion, Reptile reptileModifications);
 }

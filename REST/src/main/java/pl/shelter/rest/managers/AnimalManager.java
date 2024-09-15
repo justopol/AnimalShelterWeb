@@ -30,23 +30,18 @@ public class AnimalManager implements AnimalService {
 
     @Override
     public void editMammalById(UUID id, long originalVersion, Mammal mammalModifications) {
-        Mammal modificateMammal = findMammalById(id);
+        Mammal modificateMammal = (Mammal) findAnimalById(id);
         editMammal(originalVersion, mammalModifications, modificateMammal);
     }
 
     @Override
-    public Mammal findMammalById(UUID id) {
-        return (Mammal) animalFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
-    }
-
-    @Override
-    public Reptile findReptileById(UUID id) {
-        return (Reptile) animalFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
+    public Animal findAnimalById(UUID id) {
+        return animalFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
     }
 
     @Override
     public void editReptileById(UUID id, long originalVersion, Reptile reptileModifications) {
-        Reptile modificateReptile = findReptileById(id);
+        Reptile modificateReptile = (Reptile) findAnimalById(id);
         editReptile(originalVersion, reptileModifications, modificateReptile);
     }
 

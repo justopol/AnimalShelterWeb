@@ -52,6 +52,20 @@ public class AnimalResource {
     public List<AnimalDto> getAnimal() {
         return AnimalConverter.toDto(animalService.getAnimals());
     }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AnimalDto getAnimalById(@PathParam("id") UUID id) {
+        var animal = animalService.findAnimalById(id);
+        if (animal instanceof Mammal){
+            return AnimalConverter.toDto((Mammal) animal);
+        }
+        else if(animal instanceof  Reptile){
+            return AnimalConverter.toDto((Reptile) animal);
+        }else {
+            throw new IllegalArgumentException("Unsupported animal type: " + animal.getClass());}
+    }
     @PUT
     @Path("reptile/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
