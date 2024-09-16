@@ -36,11 +36,7 @@ public class Adoption extends AbstractEntity {
         this.adopter = adopter;
         if (animal.isReadyForAdoption()){//to do
         }
-        if (animal.getCurrentAdoption() != null) {
-            throw new AdoptionException(AdoptionException.ANIMAL_ADOPTED);
-        }
         this.animal = animal;
-        animal.addAdoption(this);
         animal.setAdoptionStatus(AdoptionStatus.UNDER_ADOPTION);
         this.finalAdoptionCost = animal.getAdoptionPrice() * (1 - adopter.getDiscount()) * animal.getBloodnessMultiplier();
     }
@@ -49,7 +45,6 @@ public class Adoption extends AbstractEntity {
             throw new AdoptionException(AdoptionException.ANIMAL_NOT_EXISTS);
         }
         this.animal.setAdoptionStatus(AdoptionStatus.ADOPTED);
-        animal.removeAdoption();
         if (endAdoptionTime.isBefore(startAdoptionTime)){
             throw new AdoptionException(AdoptionException.TIME_EXCEPTION);
         }

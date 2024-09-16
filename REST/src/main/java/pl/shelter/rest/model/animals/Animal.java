@@ -19,9 +19,6 @@ public abstract class Animal extends AbstractEntity {
 
     private  String name;
     private int age;
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
-    private Adoption currentAdoption;
-
 
     protected AdoptionStatus adoptionStatus = AdoptionStatus.FOR_ADOPTION;
 
@@ -78,18 +75,5 @@ public abstract class Animal extends AbstractEntity {
 
     public double getAdoptionPrice() {
         return basicPrice * getBloodnessMultiplier();
-    }
-
-
-    public void addAdoption(Adoption adoption) {
-        this.currentAdoption = adoption;
-    }
-
-    public void removeAdoption() {
-        this.currentAdoption = null;
-    }
-
-    public Adoption getCurrentAdoption() {
-        return currentAdoption;
     }
 }
