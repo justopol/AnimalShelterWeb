@@ -46,4 +46,6 @@ public class Address extends AbstractEntity {
     public String toString() {
         return "Address{" + "streetName=" + streetName + ", streetNumber=" + streetNumber + ", city=" + city + '}';
     }
+
+    public String toDtoString(){ return streetName + " "+streetNumber+", "+city;}
 }

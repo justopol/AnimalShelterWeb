@@ -58,13 +58,7 @@ public class AnimalResource {
     @Produces(MediaType.APPLICATION_JSON)
     public AnimalDto getAnimalById(@PathParam("id") UUID id) {
         var animal = animalService.findAnimalById(id);
-        if (animal instanceof Mammal){
-            return AnimalConverter.toDto((Mammal) animal);
-        }
-        else if(animal instanceof  Reptile){
-            return AnimalConverter.toDto((Reptile) animal);
-        }else {
-            throw new IllegalArgumentException("Unsupported animal type: " + animal.getClass());}
+        return AnimalConverter.getAnimalDto(animal);
     }
     @PUT
     @Path("reptile/{id}")

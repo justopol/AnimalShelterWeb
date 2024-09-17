@@ -42,6 +42,7 @@ public class PersonalId implements Comparable<PersonalId> {
     public String toString() {
         return "PersonalId{" + "id=" + id + '}';
     }
+    public String toDtoString(){return id;}
 
     @Override
     public int hashCode() {

@@ -1,5 +1,6 @@
 package pl.shelter.rest.converters;
 
+import org.jetbrains.annotations.NotNull;
 import pl.shelter.dto.animals.*;
 import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.model.animals.Mammal;
@@ -16,13 +17,15 @@ public class AnimalConverter {
                 addMammalCmd.getName(),
                 addMammalCmd.isCastrated());
     }
+
     public static Mammal fromEditMammalCmd(EditMammalCmd editMammalCmd) {
         return new Mammal(editMammalCmd.getType(),
                 editMammalCmd.getAge(),
                 editMammalCmd.getName(),
                 editMammalCmd.isCastrated());
     }
-    public static MammalDto toDto(Mammal mammal){
+
+    public static MammalDto toDto(Mammal mammal) {
         return new MammalDto(mammal.getId(),
                 mammal.getVersion(),
                 mammal.getType(),
@@ -33,7 +36,8 @@ public class AnimalConverter {
                 mammal.getAdoptionStatus().name(),
                 mammal.isCastrated());
     }
-    public static ReptileDto toDto(Reptile reptile){
+
+    public static ReptileDto toDto(Reptile reptile) {
         return new ReptileDto(reptile.getId(),
                 reptile.getVersion(),
                 reptile.getType(),
@@ -43,22 +47,23 @@ public class AnimalConverter {
                 reptile.getAdoptionPrice(),
                 reptile.getAdoptionStatus().name());
     }
+
     public static List<AnimalDto> toDto(List<Animal> animals) {
-        return (null == animals ? null : animals.stream()
+        return null == animals ? null : animals.stream()
                 .filter(Objects::nonNull)
-                .map(animal -> {
-                    //switch
-                    if (animal instanceof Mammal){
-                        return toDto((Mammal) animal);
-                    }
-                    else if(animal instanceof  Reptile){
-                        return toDto((Reptile) animal);
-                    }else {
-                    throw new IllegalArgumentException("Unsupported animal type: " + animal.getClass());}
-                })
-                .collect(Collectors.toList())
-        );
+                .map(AnimalConverter::getAnimalDto)
+                .collect(Collectors.toList());
     }
+
+    @NotNull
+    public static AnimalDto getAnimalDto(Animal animal) {
+        return switch (animal) {
+            case Mammal mammal -> toDto(mammal);
+            case Reptile reptile -> toDto(reptile);
+            default -> throw new IllegalArgumentException("Unsupported animal type: " + animal.getClass());
+        };
+    }
+
     public static Animal fromAddReptileCmd(AddReptileCmd addReptileCmd) {
         return new Reptile(addReptileCmd.getType(),
                 addReptileCmd.getAge(),
