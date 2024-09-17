@@ -2,6 +2,7 @@ package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import pl.shelter.rest.exceptions.persistence.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adopters.AdopterType;
@@ -12,14 +13,14 @@ import java.util.UUID;
 
 @TxTracked
 @Transactional(Transactional.TxType.REQUIRES_NEW)
-public class AdopterManager implements AdopterService{
+public class AdopterManager implements AdopterService {
 
     @Inject
     private AdopterFacade adopterFacade;
 
     @Override
     public Adopter findById(UUID id) {
-        return null;
+        return adopterFacade.find(id).orElseThrow(AppBaseException::createForEntityNotFound);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class AdopterManager implements AdopterService{
 
     @Override
     public void addNewAdopter(Adopter adopter) {
-
+        adopterFacade.create(adopter);
     }
 
     @Override
