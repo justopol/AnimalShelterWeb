@@ -20,3 +20,6 @@ insert into public.account (id, role, active, login, password, version) values  
 insert into public.person (id, email, firstname, lastname, personalid) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b174','adopter1@wp.pl', 'Jack', 'Russel', '12345678910');
 insert into public.adopter (id, adoptertype, address_id) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b174', 'STANDARD', '972e6e44-b0b0-497a-81d0-c5190c5b4888');
 insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc6', null, null, '2024-09-17', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b174', 'dbb114f6-c14c-4bbf-afe3-e6998a300d10');
+
+insert into public.account (id, role, active, login, password, version) values  ('61ac53c8-cbaf-4b02-a501-d9c48798b175', 'EMPLOYEE', true, 'Employee1', '123', 0);
+insert into public.person (id, email, firstname, lastname, personalid) values  ('61ac53c8-cbaf-4b02-a501-d9c48798b175','employee1@wp.pl', 'Emp', 'Loyee', '12345678911');

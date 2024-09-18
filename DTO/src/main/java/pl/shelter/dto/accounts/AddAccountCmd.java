@@ -1,33 +1,24 @@
-package pl.shelter.dto.adopters;
+package pl.shelter.dto.accounts;
 
-import pl.shelter.dto.AbstractDto;
-
-import java.util.UUID;
-
-public class AddAdopterCmd{
+public class AddAccountCmd {
 
     private String login;
+    private String password;
     private String email;
     private String firstName;
     private String lastName;
     private String personalId;
-    private String streetName;
-    private String streetNumber;
-    private String city;
 
-    public AddAdopterCmd() {
+    public AddAccountCmd() {
     }
 
-    public AddAdopterCmd(String login, String email, String firstName, String lastName,
-                         String personalId, String streetName, String streetNumber, String city) {
+    public AddAccountCmd(String login, String password, String email, String firstName, String lastName, String personalId) {
         this.login = login;
+        this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.personalId = personalId;
-        this.streetName = streetName;
-        this.streetNumber = streetNumber;
-        this.city = city;
     }
 
     public String getLogin() {
@@ -69,28 +60,11 @@ public class AddAdopterCmd{
     public void setPersonalId(String personalId) {
         this.personalId = personalId;
     }
-
-    public String getStreetName() {
-        return streetName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -12,5 +12,12 @@ public class Employee extends Account{
     public Employee(String login, String password, String email, String firstName, String lastName, PersonalId personId) {
         super(login, password, email, firstName, lastName, personId);
     }
+
+    public Employee(String email, String firstName, String lastName) {
+        setEmail(email);
+        setFirstName(firstName);
+        setLastName(lastName);
+    }
+
 }
 

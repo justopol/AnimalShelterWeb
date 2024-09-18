@@ -3,15 +3,11 @@ package pl.shelter.rest.endpoints;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import pl.shelter.dto.adopters.AddAdopterCmd;
-import pl.shelter.dto.adopters.AdopterDto;
-import pl.shelter.dto.animals.AddMammalCmd;
-import pl.shelter.dto.animals.AnimalDto;
+import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
+import pl.shelter.dto.accounts.adopters.AdopterDto;
 import pl.shelter.rest.converters.AdopterConverter;
-import pl.shelter.rest.converters.AnimalConverter;
 import pl.shelter.rest.managers.AdopterService;
 import pl.shelter.rest.model.adopters.Adopter;
-import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.utils.security.HashGenerator;
 
 import java.util.List;
@@ -46,6 +42,7 @@ public class AdopterResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void createAdopter(AddAdopterCmd addAdopterCmd) {
+        addAdopterCmd.setPassword(hashGenerator.generateHash(addAdopterCmd.getPassword()));
         Adopter newAdopter = AdopterConverter.fromAddAdopterCmd(addAdopterCmd);
         adopterService.addNewAdopter(newAdopter);
     }
