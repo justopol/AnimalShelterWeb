@@ -1,9 +1,13 @@
 package pl.shelter.rest.repositories;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import pl.shelter.rest.exceptions.persistence.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
+import pl.shelter.rest.model.accounts.Employee;
 import pl.shelter.rest.model.adopters.Adopter;
 
 
@@ -36,5 +40,15 @@ public class AdopterFacade extends AbstractEMFacade<Adopter> {
     }
     public void create(Adopter adopter) {
         super.create(adopter);
+    }
+    @Override
+    public void edit(Adopter entity) {
+        try {
+            super.edit(entity);
+        } catch (OptimisticLockException ole) {
+            throw AppBaseException.createForOptimisticLock(ole);
+        } catch (PersistenceException pe) {
+            throw AppBaseException.createForPersistenceError(pe);
+        }
     }
 }

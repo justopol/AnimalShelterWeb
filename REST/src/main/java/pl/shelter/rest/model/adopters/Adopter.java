@@ -26,6 +26,13 @@ public class Adopter extends Account {
         this.adopterType = adopterType;
     }
 
+    public Adopter(String firstName, String lastName, String email, Address address) {
+        this.firstName =firstName;
+        this.lastName = lastName;
+        this.setEmail(email);
+        this.address = address;
+    }
+
     public AdopterType getAdopterType() {
         return adopterType;
     }

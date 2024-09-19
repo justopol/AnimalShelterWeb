@@ -1,7 +1,10 @@
 package pl.shelter.rest.converters;
 
+import pl.shelter.dto.accounts.EditEmployeeCmd;
 import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
+import pl.shelter.dto.accounts.adopters.EditAdopterCmd;
+import pl.shelter.rest.model.accounts.Employee;
 import pl.shelter.rest.model.accounts.PersonalId;
 import pl.shelter.rest.model.adopters.Address;
 import pl.shelter.rest.model.adopters.Adopter;
@@ -42,5 +45,14 @@ public class AdopterConverter {
                         addAdopterCmd.getStreetNumber(),
                         addAdopterCmd.getCity()),
                 AdopterType.STANDARD);
+    }
+
+    public static Adopter fromEditAdopterCmd(EditAdopterCmd editAdopterCmd) {
+        return new Adopter(editAdopterCmd.getFirstName(),
+                editAdopterCmd.getLastName(),
+                editAdopterCmd.getEmail(),
+                new Address(editAdopterCmd.getStreetName(),
+                        editAdopterCmd.getStreetNumber(),
+                        editAdopterCmd.getCity()));
     }
 }
