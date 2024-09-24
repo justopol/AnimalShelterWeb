@@ -11,11 +11,11 @@ public interface AdopterService {
 
     List<Adopter> findAll();
 
-
-    Adopter findByLogin(String login);
-
-    Adopter findSelf();
     void addNewAdopter(Adopter adopter);
+
     void editAdopter(UUID uuid, long originalVersion, Adopter adopterModifications);
+
     void editStatusOfAdopter(UUID id, AdopterType adopterType);
+
+    void changePassword(UUID uuid, long originalVersion, String password);
 }

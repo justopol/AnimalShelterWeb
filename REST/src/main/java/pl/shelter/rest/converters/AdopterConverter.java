@@ -55,4 +55,7 @@ public class AdopterConverter {
                         editAdopterCmd.getStreetNumber(),
                         editAdopterCmd.getCity()));
     }
+    public static AdopterType fromString(String adopterType){
+        return AdopterType.valueOf(adopterType);
+    }
 }
