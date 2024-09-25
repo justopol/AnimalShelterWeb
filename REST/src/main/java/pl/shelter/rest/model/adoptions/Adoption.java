@@ -23,7 +23,6 @@ public class Adoption extends AbstractEntity {
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Animal animal;
     private double finalAdoptionCost;
-    protected AdoptionStatus adoptionStatus = AdoptionStatus.FOR_ADOPTION;
 
     public Adoption() {
         super(UUID.randomUUID());
@@ -38,14 +37,14 @@ public class Adoption extends AbstractEntity {
         if (animal.isReadyForAdoption()){//to do
         }
         this.animal = animal;
-        setAdoptionStatus(AdoptionStatus.UNDER_ADOPTION);
+        animal.setAdoptionStatus(AdoptionStatus.UNDER_ADOPTION);
         this.finalAdoptionCost = animal.getAdoptionPrice() * (1 - adopter.getDiscount()) * animal.getBloodnessMultiplier();
     }
     public void finishAdoption(LocalDate endAdoptionTime) throws AdoptionException {
         if (animal ==null){
             throw new AdoptionException(AdoptionException.ANIMAL_NOT_EXISTS);
         }
-        this.setAdoptionStatus(AdoptionStatus.ADOPTED);
+        this.animal.setAdoptionStatus(AdoptionStatus.ADOPTED);
         if (endAdoptionTime.isBefore(startAdoptionTime)){
             throw new AdoptionException(AdoptionException.TIME_EXCEPTION);
         }
@@ -68,13 +67,6 @@ public class Adoption extends AbstractEntity {
 
     public double getFinalAdoptionCost() {
         return finalAdoptionCost;
-    }
-    public AdoptionStatus getAdoptionStatus() {
-        return adoptionStatus;
-    }
-
-    public void setAdoptionStatus(AdoptionStatus adoptionStatus) {
-        this.adoptionStatus = adoptionStatus;
     }
 
 }
