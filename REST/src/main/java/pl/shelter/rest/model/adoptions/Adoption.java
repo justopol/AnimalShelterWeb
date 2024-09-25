@@ -50,11 +50,11 @@ public class Adoption extends AbstractEntity {
         }
         this.endAdoptionTime = endAdoptionTime;
     }
-    public long calculateDays() throws AdoptionException {
-        if (endAdoptionTime.isBefore(startAdoptionTime)){
-            throw new AdoptionException(AdoptionException.TIME_EXCEPTION);
+    public int calculateDays(){
+        if (endAdoptionTime==null){
+            return (int)ChronoUnit.DAYS.between(startAdoptionTime,LocalDate.now());
         }
-        return ChronoUnit.DAYS.between(startAdoptionTime,endAdoptionTime);
+        return (int)ChronoUnit.DAYS.between(startAdoptionTime,endAdoptionTime);
     }
 
     public Adopter getAdopter() {

@@ -53,9 +53,10 @@ public class Adopter extends Account {
             case STANDARD, BLACKLISTED -> 0.0;
             case PREVIOUS_ADOPTER -> 0.5;
         };
-
     }
-
+public String getFullName(){
+        return this.firstName+" "+this.lastName;
+}
 
 
 }
