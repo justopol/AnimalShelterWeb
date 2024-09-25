@@ -4,17 +4,14 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.accounts.ChangePasswordCmd;
-import pl.shelter.dto.accounts.EditEmployeeCmd;
 import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
 import pl.shelter.dto.accounts.adopters.ChangeStatusCmd;
 import pl.shelter.dto.accounts.adopters.EditAdopterCmd;
 import pl.shelter.rest.converters.AdopterConverter;
-import pl.shelter.rest.converters.EmployeeConverter;
 import pl.shelter.rest.managers.AdopterService;
-import pl.shelter.rest.model.accounts.Employee;
 import pl.shelter.rest.model.adopters.Adopter;
-import pl.shelter.rest.model.adopters.AdopterType;
+import pl.shelter.rest.model.enums.AdopterType;
 import pl.shelter.rest.utils.security.HashGenerator;
 
 import java.util.List;

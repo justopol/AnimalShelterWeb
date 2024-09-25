@@ -6,7 +6,7 @@ import pl.shelter.rest.exceptions.persistence.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.adopters.Address;
 import pl.shelter.rest.model.adopters.Adopter;
-import pl.shelter.rest.model.adopters.AdopterType;
+import pl.shelter.rest.model.enums.AdopterType;
 import pl.shelter.rest.repositories.AddressFacade;
 import pl.shelter.rest.repositories.AdopterFacade;
 

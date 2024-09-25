@@ -1,14 +1,12 @@
 package pl.shelter.rest.converters;
 
-import pl.shelter.dto.accounts.EditEmployeeCmd;
 import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
 import pl.shelter.dto.accounts.adopters.EditAdopterCmd;
-import pl.shelter.rest.model.accounts.Employee;
 import pl.shelter.rest.model.accounts.PersonalId;
 import pl.shelter.rest.model.adopters.Address;
 import pl.shelter.rest.model.adopters.Adopter;
-import pl.shelter.rest.model.adopters.AdopterType;
+import pl.shelter.rest.model.enums.AdopterType;
 
 import java.util.List;
 import java.util.Objects;

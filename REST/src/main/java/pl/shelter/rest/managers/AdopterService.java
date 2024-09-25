@@ -1,7 +1,7 @@
 package pl.shelter.rest.managers;
 
 import pl.shelter.rest.model.adopters.Adopter;
-import pl.shelter.rest.model.adopters.AdopterType;
+import pl.shelter.rest.model.enums.AdopterType;
 
 import java.util.List;
 import java.util.UUID;

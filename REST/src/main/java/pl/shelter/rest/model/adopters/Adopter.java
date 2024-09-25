@@ -3,8 +3,7 @@ package pl.shelter.rest.model.adopters;
 import jakarta.persistence.*;
 import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.model.accounts.PersonalId;
-
-import java.util.UUID;
+import pl.shelter.rest.model.enums.AdopterType;
 
 @Entity
 @DiscriminatorValue("ADOPTER")
