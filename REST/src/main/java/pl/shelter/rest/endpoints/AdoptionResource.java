@@ -3,10 +3,12 @@ package pl.shelter.rest.endpoints;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import pl.shelter.dto.accounts.adoptions.AddAdoptionCmd;
 import pl.shelter.dto.accounts.adoptions.AdoptionDto;
 import pl.shelter.rest.converters.AdoptionConverter;
 import pl.shelter.rest.exceptions.entities.AdoptionException;
+import pl.shelter.rest.exceptions.persistence.AppBaseException;
 import pl.shelter.rest.managers.AdoptionService;
 import pl.shelter.rest.model.adoptions.Adoption;
 
@@ -30,9 +32,13 @@ public class AdoptionResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createAdoption(AddAdoptionCmd addAdoptionCmd) throws AdoptionException {
-        Adoption newAdoption = AdoptionConverter.fromAddAdoptionCmd(addAdoptionCmd);
-        adoptionService.addNewAdoption(newAdoption);
+    public void createAdoption(AddAdoptionCmd addAdoptionCmd) {
+        try{
+            adoptionService.addNewAdoption(addAdoptionCmd.getAdopterUuid(), addAdoptionCmd.getAnimalUuid());
+        }
+        catch (AdoptionException ex){
+            throw new AppBaseException(Response.Status.FORBIDDEN, ex.getMessage());
+        }
     }
 
     @PUT

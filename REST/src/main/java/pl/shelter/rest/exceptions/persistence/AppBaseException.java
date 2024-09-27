@@ -39,7 +39,7 @@ public class AppBaseException extends WebApplicationException {
         this.cause = cause;
     }
 
-    protected AppBaseException(Response.Status status, String key) {
+    public AppBaseException(Response.Status status, String key) {
         super(Response.status(status).entity(key).build());
     }
 

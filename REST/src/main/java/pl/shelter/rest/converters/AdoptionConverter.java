@@ -9,6 +9,7 @@ import pl.shelter.rest.model.adoptions.Adoption;
 import pl.shelter.rest.model.enums.AdopterType;
 import pl.shelter.rest.model.enums.AdoptionStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,17 +36,5 @@ public class AdoptionConverter {
                 .collect(Collectors.toList());
     }
 
-    public static Adoption fromAddAdoptionCmd(AddAdoptionCmd addAdoptionCmd) throws AdoptionException {
-        var adoption = new Adoption();
-        adoption.createAdoption(
-                null,
-                null,
-                null
-        );
-        return adoption;
-    }
 
-    public static AdoptionStatus fromString(String adoptionStatus){
-        return AdoptionStatus.valueOf(adoptionStatus);
-    }
 }

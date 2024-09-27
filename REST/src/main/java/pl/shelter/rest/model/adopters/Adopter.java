@@ -5,6 +5,8 @@ import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.model.accounts.PersonalId;
 import pl.shelter.rest.model.enums.AdopterType;
 
+import java.util.UUID;
+
 @Entity
 @DiscriminatorValue("ADOPTER")
 @SecondaryTable(name = "adopter")
@@ -31,6 +33,7 @@ public class Adopter extends Account {
         this.setEmail(email);
         this.address = address;
     }
+
 
     public AdopterType getAdopterType() {
         return adopterType;
