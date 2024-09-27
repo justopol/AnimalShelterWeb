@@ -1,10 +1,13 @@
 package pl.shelter.rest.converters;
 
 import pl.shelter.dto.accounts.adopters.AdopterDto;
+import pl.shelter.dto.accounts.adoptions.AddAdoptionCmd;
 import pl.shelter.dto.accounts.adoptions.AdoptionDto;
 import pl.shelter.rest.exceptions.entities.AdoptionException;
 import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adoptions.Adoption;
+import pl.shelter.rest.model.enums.AdopterType;
+import pl.shelter.rest.model.enums.AdoptionStatus;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,5 +33,19 @@ public class AdoptionConverter {
                 .filter(Objects::nonNull)
                 .map(AdoptionConverter::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public static Adoption fromAddAdoptionCmd(AddAdoptionCmd addAdoptionCmd) throws AdoptionException {
+        var adoption = new Adoption();
+        adoption.createAdoption(
+                null,
+                null,
+                null
+        );
+        return adoption;
+    }
+
+    public static AdoptionStatus fromString(String adoptionStatus){
+        return AdoptionStatus.valueOf(adoptionStatus);
     }
 }

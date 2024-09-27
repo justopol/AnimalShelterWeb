@@ -1,19 +1,21 @@
 package pl.shelter.rest.endpoints;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import pl.shelter.dto.accounts.adoptions.AddAdoptionCmd;
 import pl.shelter.dto.accounts.adoptions.AdoptionDto;
 import pl.shelter.rest.converters.AdoptionConverter;
+import pl.shelter.rest.exceptions.entities.AdoptionException;
 import pl.shelter.rest.managers.AdoptionService;
+import pl.shelter.rest.model.adoptions.Adoption;
 
 import java.util.List;
+import java.util.UUID;
 
 @Path("/adoptions")
 public class AdoptionResource {
-    private AdoptionService adoptionService;
+    private final AdoptionService adoptionService;
 
     @Inject
     public AdoptionResource(AdoptionService adoptionService) {
@@ -23,13 +25,29 @@ public class AdoptionResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<AdoptionDto> getAllAdoptions() {
-        var res = adoptionService.findAll();
-
-        for (var item : res){
-            var r = AdoptionConverter.toDto(item);
-            int a = 5;
-        }
-
         return AdoptionConverter.toDto(adoptionService.findAll());
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createAdoption(AddAdoptionCmd addAdoptionCmd) throws AdoptionException {
+        Adoption newAdoption = AdoptionConverter.fromAddAdoptionCmd(addAdoptionCmd);
+        adoptionService.addNewAdoption(newAdoption);
+    }
+
+    @PUT
+    @Path("{id}/finish")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void finishAdoption(@PathParam("id") UUID id) {
+        //todo
+        adoptionService.finishAdoption(id);
+    }
+
+    @PUT
+    @Path("{id}/cancel")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void cancelAdoption(@PathParam("id") UUID id) {
+        //todo
+        adoptionService.cancelAdoption(id);
     }
 }

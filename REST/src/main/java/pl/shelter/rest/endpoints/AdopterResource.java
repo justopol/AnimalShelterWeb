@@ -6,7 +6,7 @@ import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.accounts.ChangePasswordCmd;
 import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
-import pl.shelter.dto.accounts.adopters.ChangeStatusCmd;
+import pl.shelter.dto.accounts.adopters.ChangeAdopterStatusCmd;
 import pl.shelter.dto.accounts.adopters.EditAdopterCmd;
 import pl.shelter.rest.converters.AdopterConverter;
 import pl.shelter.rest.managers.AdopterService;
@@ -67,8 +67,8 @@ public class AdopterResource {
     @PUT
     @Path("{id}/status")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void changeStatus(@PathParam("id") UUID id, ChangeStatusCmd changeStatusCmd) {
-        AdopterType newAdopterType = AdopterConverter.fromString(changeStatusCmd.getAdopterType());
+    public void changeStatus(@PathParam("id") UUID id, ChangeAdopterStatusCmd changeAdopterStatusCmd) {
+        AdopterType newAdopterType = AdopterConverter.fromString(changeAdopterStatusCmd.getAdopterType());
         adopterService.editStatusOfAdopter(id, newAdopterType);
     }
 }

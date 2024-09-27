@@ -34,7 +34,7 @@ public class Adoption extends AbstractEntity {
         }
         this.startAdoptionTime = startAdoptionTime;
         this.adopter = adopter;
-        if (animal.isReadyForAdoption()){//to do
+        if (animal.isReadyForAdoption()){//to dol
         }
         this.animal = animal;
         animal.setAdoptionStatus(AdoptionStatus.UNDER_ADOPTION);

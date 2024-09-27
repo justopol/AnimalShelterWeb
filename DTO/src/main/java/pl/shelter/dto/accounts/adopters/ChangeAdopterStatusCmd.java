@@ -1,15 +1,15 @@
 package pl.shelter.dto.accounts.adopters;
 
-public class ChangeStatusCmd {
+public class ChangeAdopterStatusCmd {
     private long originalVersion;
     private String adopterType;
 
-    public ChangeStatusCmd(long originalVersion, String adopterType) {
+    public ChangeAdopterStatusCmd(long originalVersion, String adopterType) {
         this.originalVersion = originalVersion;
         this.adopterType = adopterType;
     }
 
-    public ChangeStatusCmd() {
+    public ChangeAdopterStatusCmd() {
     }
 
     public long getOriginalVersion() {
