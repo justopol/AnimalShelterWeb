@@ -1,6 +1,6 @@
 package pl.shelter.rest.managers;
 
-import pl.shelter.rest.exceptions.persistence.AppBaseException;
+import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.model.accounts.Account;
 
 public interface AuthService {

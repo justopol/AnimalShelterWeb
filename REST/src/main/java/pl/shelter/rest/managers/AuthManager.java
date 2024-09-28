@@ -2,7 +2,7 @@ package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import pl.shelter.rest.exceptions.persistence.AppBaseException;
+import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.repositories.AuthFacade;

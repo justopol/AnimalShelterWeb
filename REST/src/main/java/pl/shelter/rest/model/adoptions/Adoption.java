@@ -3,7 +3,7 @@ package pl.shelter.rest.model.adoptions;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
-import pl.shelter.rest.exceptions.entities.AdoptionException;
+import pl.shelter.rest.exceptions.AdoptionException;
 import pl.shelter.rest.model.AbstractEntity;
 import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.animals.Animal;
@@ -30,12 +30,12 @@ public class Adoption extends AbstractEntity {
 
     public void createAdoption(LocalDate startAdoptionTime, Adopter adopter, Animal animal) throws AdoptionException {
         if (animal ==null){
-            throw new AdoptionException(AdoptionException.ANIMAL_NOT_EXISTS);
+//            throw  AdoptionException.createForNotReadyForAdoption(AdoptionException.ANIMAL_NOT_EXISTS);
         }
         this.startAdoptionTime = startAdoptionTime;
         this.adopter = adopter;
         if (!animal.isReadyForAdoption()){
-            throw new AdoptionException(AdoptionException.ANIMAL_NOT_READY_FOR_ADOPTION);
+            throw AdoptionException.createForNotReadyForAdoption();
         }
         this.animal = animal;
         animal.setAdoptionStatus(AdoptionStatus.UNDER_ADOPTION);
@@ -43,11 +43,11 @@ public class Adoption extends AbstractEntity {
     }
     public void finishAdoption(LocalDate endAdoptionTime) throws AdoptionException {
         if (animal ==null){
-            throw new AdoptionException(AdoptionException.ANIMAL_NOT_EXISTS);
+//            throw new AdoptionException(AdoptionException.ANIMAL_NOT_EXISTS);ANIMAL_NOT_EXISTS
         }
         this.animal.setAdoptionStatus(AdoptionStatus.ADOPTED);
         if (endAdoptionTime.isBefore(startAdoptionTime)){
-            throw new AdoptionException(AdoptionException.TIME_EXCEPTION);
+//            throw new AdoptionException(AdoptionException.TIME_EXCEPTION);
         }
         this.endAdoptionTime = endAdoptionTime;
     }

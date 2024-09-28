@@ -1,6 +1,6 @@
 package pl.shelter.rest.managers;
 
-import pl.shelter.rest.exceptions.entities.AdoptionException;
+import pl.shelter.rest.exceptions.AdoptionException;
 import pl.shelter.rest.model.adoptions.Adoption;
 
 import java.util.List;

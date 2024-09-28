@@ -1,4 +1,4 @@
-package pl.shelter.rest.exceptions.persistence;
+package pl.shelter.rest.exceptions;
 
 import jakarta.persistence.PersistenceException;
 import jakarta.ws.rs.core.Response;

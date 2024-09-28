@@ -5,9 +5,8 @@ import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
-import pl.shelter.rest.exceptions.persistence.AppBaseException;
+import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
-import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adoptions.Adoption;
 
 import java.util.List;

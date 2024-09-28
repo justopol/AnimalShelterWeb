@@ -7,10 +7,9 @@ import jakarta.ws.rs.core.Response;
 import pl.shelter.dto.accounts.adoptions.AddAdoptionCmd;
 import pl.shelter.dto.accounts.adoptions.AdoptionDto;
 import pl.shelter.rest.converters.AdoptionConverter;
-import pl.shelter.rest.exceptions.entities.AdoptionException;
-import pl.shelter.rest.exceptions.persistence.AppBaseException;
+import pl.shelter.rest.exceptions.AdoptionException;
+import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.managers.AdoptionService;
-import pl.shelter.rest.model.adoptions.Adoption;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,12 +32,8 @@ public class AdoptionResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void createAdoption(AddAdoptionCmd addAdoptionCmd) {
-        try{
-            adoptionService.addNewAdoption(addAdoptionCmd.getAdopterUuid(), addAdoptionCmd.getAnimalUuid());
-        }
-        catch (AdoptionException ex){
-            throw new AppBaseException(Response.Status.FORBIDDEN, ex.getMessage());
-        }
+        adoptionService.addNewAdoption(addAdoptionCmd.getAdopterUuid(), addAdoptionCmd.getAnimalUuid());
+
     }
 
     @PUT

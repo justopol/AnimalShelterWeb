@@ -2,10 +2,9 @@ package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import pl.shelter.rest.exceptions.persistence.AppBaseException;
+import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.accounts.Employee;
-import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.repositories.EmployeeFacade;
 
 import java.util.List;

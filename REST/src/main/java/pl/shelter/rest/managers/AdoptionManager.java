@@ -2,8 +2,8 @@ package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import pl.shelter.rest.exceptions.entities.AdoptionException;
-import pl.shelter.rest.exceptions.persistence.AppBaseException;
+import pl.shelter.rest.exceptions.AdoptionException;
+import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.adoptions.Adoption;
 import pl.shelter.rest.model.enums.AdoptionStatus;

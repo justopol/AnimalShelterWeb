@@ -1,4 +1,4 @@
-package pl.shelter.rest.exceptions.persistence;
+package pl.shelter.rest.exceptions;
 
 import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.PersistenceException;
