@@ -3,12 +3,9 @@ package pl.shelter.rest.endpoints;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import pl.shelter.dto.accounts.adoptions.AddAdoptionCmd;
 import pl.shelter.dto.accounts.adoptions.AdoptionDto;
 import pl.shelter.rest.converters.AdoptionConverter;
-import pl.shelter.rest.exceptions.AdoptionException;
-import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.managers.AdoptionService;
 
 import java.util.List;

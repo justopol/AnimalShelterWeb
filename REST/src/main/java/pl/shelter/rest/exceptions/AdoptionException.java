@@ -14,5 +14,14 @@ public class AdoptionException extends AppBaseException {
     public static AdoptionException createForNotReadyForAdoption() {
         return new AdoptionException(Response.Status.NOT_ACCEPTABLE, ANIMAL_NOT_READY_FOR_ADOPTION);
     }
+    public static AdoptionException createForAnimalNotExist() {
+        return new AdoptionException(Response.Status.NOT_FOUND, ANIMAL_NOT_EXISTS);
+    }
+    public static AdoptionException createForAnimalAdopted() {
+        return new AdoptionException(Response.Status.CONFLICT, ANIMAL_ADOPTED);
+    }
+    public static AdoptionException createForTimeException() {
+        return new AdoptionException(Response.Status.NOT_ACCEPTABLE, TIME_EXCEPTION);
+    }
 }
 

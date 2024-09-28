@@ -1,7 +1,9 @@
 package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
+import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import pl.shelter.rest.exceptions.AdopterException;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.adopters.Address;
@@ -34,7 +36,12 @@ public class AdopterManager implements AdopterService {
 
     @Override
     public void addNewAdopter(Adopter adopter) {
-        adopterFacade.create(adopter);
+        try {
+            adopterFacade.create(adopter);
+        } catch(PersistenceException persistenceException) {
+            throw AdopterException.createForAdopterExists();
+        }
+
     }
 
     @Override
@@ -74,7 +81,6 @@ public class AdopterManager implements AdopterService {
         }
         if (null != adopterModifications.getAddress()) {
             var address = addressFacade.find(modifiedAdopter.getAddress().getId()).orElseThrow(AppBaseException::createForEntityNotFound);
-            ;
             editAddress(adopterModifications.getAddress(), address);
             modifiedAdopter.setAddress(address);
         }

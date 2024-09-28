@@ -5,7 +5,7 @@ import pl.shelter.rest.model.enums.AdoptionStatus;
 import pl.shelter.rest.model.enums.Bloodness;
 
 @Entity
-public class Reptile extends Animal{
+public class Reptile extends Animal {
     public Reptile() {
     }
 
@@ -20,9 +20,6 @@ public class Reptile extends Animal{
 
     @Override
     public boolean isReadyForAdoption() {
-        if (adoptionStatus.equals(AdoptionStatus.FOR_ADOPTION)){
-            return true;
-        }
-        return false;
+        return true;
     }
 }
