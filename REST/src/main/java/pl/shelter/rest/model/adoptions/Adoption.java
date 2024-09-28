@@ -54,12 +54,27 @@ public class Adoption extends AbstractEntity {
         if (animal == null) {
             throw AdoptionException.createForAnimalNotExist();
         }
+        if (animal.getAdoptionStatus()==AdoptionStatus.ADOPTED){
+            throw AdoptionException.createForAnimalAdopted();
+        }
+        if (adopter.getAdopterType()== AdopterType.BLACKLISTED){
+            throw AdopterException.createForBlacklistAdopter();
+        }
         this.animal.setAdoptionStatus(AdoptionStatus.ADOPTED);
+        this.adopter.setAdopterType(AdopterType.PREVIOUS_ADOPTER);
         if (endAdoptionTime.isBefore(startAdoptionTime)) {
             throw AdoptionException.createForTimeException();
         }
         this.endAdoptionTime = endAdoptionTime;
     }
+    public void cancelAdoption() throws AdoptionException {
+        if (animal == null) {
+            throw AdoptionException.createForAnimalNotExist();
+        }
+        this.animal.setAdoptionStatus(AdoptionStatus.FOR_ADOPTION);
+        this.adopter.setAdopterType(AdopterType.BLACKLISTED);
+    }
+
 
     public int calculateDays() {
         if (endAdoptionTime == null) {

@@ -37,7 +37,6 @@ public class AdoptionResource {
     @Path("{id}/finish")
     @Consumes(MediaType.APPLICATION_JSON)
     public void finishAdoption(@PathParam("id") UUID id) {
-        //todo
         adoptionService.finishAdoption(id);
     }
 
@@ -45,7 +44,6 @@ public class AdoptionResource {
     @Path("{id}/cancel")
     @Consumes(MediaType.APPLICATION_JSON)
     public void cancelAdoption(@PathParam("id") UUID id) {
-        //todo
         adoptionService.cancelAdoption(id);
     }
 }

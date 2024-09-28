@@ -12,20 +12,16 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Animal extends AbstractEntity {
     private String type;
-
-
-    private boolean available;
     private double basicPrice = 20;
-
-    private  String name;
+    private String name;
     private int age;
-
     protected AdoptionStatus adoptionStatus = AdoptionStatus.FOR_ADOPTION;
 
 
     public Animal() {
         super(UUID.randomUUID());
     }
+
     public Animal(String type, int age, String name) {
         super(UUID.randomUUID());
         this.type = type;
@@ -36,6 +32,7 @@ public abstract class Animal extends AbstractEntity {
     protected abstract Bloodness getBloodness();
 
     public abstract boolean isReadyForAdoption();
+
     public AdoptionStatus getAdoptionStatus() {
         return adoptionStatus;
     }
@@ -43,6 +40,7 @@ public abstract class Animal extends AbstractEntity {
     public void setAdoptionStatus(AdoptionStatus adoptionStatus) {
         this.adoptionStatus = adoptionStatus;
     }
+
     public String getType() {
         return type;
     }
@@ -50,6 +48,7 @@ public abstract class Animal extends AbstractEntity {
     public void setType(String type) {
         this.type = type;
     }
+
     public String getName() {
         return name;
     }

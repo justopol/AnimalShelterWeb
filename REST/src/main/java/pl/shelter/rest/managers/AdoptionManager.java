@@ -47,14 +47,14 @@ public class AdoptionManager implements AdoptionService{
     @Override
     public void finishAdoption(UUID id) {
         var adoption = findById(id);
-        adoption.getAnimal().setAdoptionStatus(AdoptionStatus.ADOPTED);//todo
+        adoption.finishAdoption(LocalDate.now());
         adoptionFacade.edit(adoption);
     }
 
     @Override
     public void cancelAdoption(UUID id) {
         var adoption = findById(id);
-        adoption.getAnimal().setAdoptionStatus(AdoptionStatus.FOR_ADOPTION);//todo
+        adoption.cancelAdoption();
         adoptionFacade.edit(adoption);
     }
 }
