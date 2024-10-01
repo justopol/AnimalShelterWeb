@@ -16,9 +16,15 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>
-        <!-- When set to Development, JSF provides more debugging info on pages (ie. not caught messages are displayed) -->
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
-        <!--        <param-value>Production</param-value>-->
+    </context-param>
+    <context-param>
+        <param-name>jakarta.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jakarta.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
     </context-param>
 </web-app>

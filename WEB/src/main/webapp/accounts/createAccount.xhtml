@@ -19,9 +19,12 @@
         <h:messages />
         <h:form id="createAccount">
             <h:panelGrid columns="3" border="0">
-                <h:column>${msg["account.login"]}*: </h:column><h:column><h:inputText id="login" value="#{createAccountController.newAccount.login}"/></h:column><h:column><h:message for="login"/></h:column>
-                <h:column>${msg["account.password"]}*: </h:column><h:column><h:inputSecret id="password" value="#{createAccountController.newAccount.password}"/></h:column><h:column><h:message for="password"/></h:column>
-                <h:column>${msg["account.email"]}*: </h:column><h:column><h:inputText id="email" value="#{createAccountController.newAccount.email}"/></h:column><h:column><h:message for="email"/></h:column>
+                <h:column>${msg["account.login"]}: </h:column><h:column><h:inputText id="login" value="#{createAccountController.newAccount.login}"/></h:column><h:column><h:message for="login"/></h:column>
+                <h:column>${msg["account.password"]}: </h:column><h:column><h:inputSecret id="password" value="#{createAccountController.newAccount.password}"/></h:column><h:column><h:message for="password"/></h:column>
+                <h:column>${msg["account.email"]}: </h:column><h:column><h:inputText id="email" value="#{createAccountController.newAccount.email}"/></h:column><h:column><h:message for="email"/></h:column>
+                <h:column>${msg["account.firstName"]}: </h:column><h:column><h:inputText id="firstName" value="#{createAccountController.newAccount.firstName}"/></h:column><h:column><h:message for="firstName"/></h:column>
+                <h:column>${msg["account.lastName"]}: </h:column><h:column><h:inputText id="lastName" value="#{createAccountController.newAccount.lastName}"/></h:column><h:column><h:message for="lastName"/></h:column>
+                <h:column>${msg["account.personalId"]}: </h:column><h:column><h:inputText id="personalId" value="#{createAccountController.newAccount.personalId}"/></h:column><h:column><h:message for="personalId"/></h:column>
             </h:panelGrid>
             <p>
                 <h:commandButton action="main" value="${msg['action.cancel']}" immediate="true"/>
