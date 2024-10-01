@@ -3,6 +3,24 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                                   https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
+    <application>
+        <locale-config>
+            <default-locale>pl</default-locale>
+            <supported-locale>pl</supported-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <!--        Resource for application messages-->
+        <resource-bundle>
+            <base-name>i18n.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <!--        Resource for internal JSF messages-->
+        <message-bundle>
+            i18n.jsf_messages
+        </message-bundle>
+        <!--        For BeanValidation messages, there must be a ValidationMessages resource in the root of resources folder.
+                    That resource mustn't be declared here! -->
+    </application>
 
     <navigation-rule>
         <navigation-case>
