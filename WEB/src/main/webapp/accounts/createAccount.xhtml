@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:outputLabel value="Create account"/>
+    <h:form id="createAccount">
+        <h:outputText value="login*: " /><h:inputText value="#{createAccountController.newAccount.login}" required="true" id="login"/><h:message for="login"/> <br />
+        <h:outputText value="password: " /><h:inputSecret value="#{createAccountController.newAccount.password}" id="password"/><h:message for="password"/><br />
+        <h:outputText value="email: " /><h:inputText value="#{createAccountController.newAccount.email}" id="email"/><h:message for="email"/><br />
+        <h:commandButton action="#{createAccountController.createEmployee()}" value="OK"/>
+        <h:commandButton action="main" value="Cancel" immediate="true"/><br />
+        <h:messages globalOnly="true"/>
+    </h:form>
+</f:view>
+</html>
