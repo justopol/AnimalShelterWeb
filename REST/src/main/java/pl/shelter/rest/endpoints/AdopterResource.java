@@ -59,12 +59,6 @@ public class AdopterResource {
     }
 
     @PUT
-    @Path("{id}/password")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void changePassword(@PathParam("id") UUID id, ChangePasswordCmd changePasswordCmd) {
-        adopterService.changePassword(id, changePasswordCmd.getOriginalVersion(), hashGenerator.generateHash(changePasswordCmd.getPassword()));
-    }
-    @PUT
     @Path("{id}/status")
     @Consumes(MediaType.APPLICATION_JSON)
     public void changeStatus(@PathParam("id") UUID id, ChangeAdopterStatusCmd changeAdopterStatusCmd) {
