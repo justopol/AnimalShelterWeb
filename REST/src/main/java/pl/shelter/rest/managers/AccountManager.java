@@ -86,6 +86,24 @@ public class AccountManager implements AccountService{
     public List<Admin> findAllAdmins() {
         return adminFacade.findAll();
     }
+    @Override
+    public void activateAccount(UUID id) {
+        setAccountActive(id, true);
+    }
+    @Override
+    public void deactivateAccount(UUID id) {
+        setAccountActive(id, false);
+    }
+    @Override
+    public Account findAccountByLogin(String login) {
+        return accountFacade.findByLogin(login).orElseThrow(AppBaseException::createForEntityNotFound);
+    }
+    @Override
+    public List<Account> findAllAccounts() {
+        return accountFacade.findAll();
+    }
+
+
     private static void editAccount(long originalVersion, Account accountModifications, Account modifiedAccount) {
         if (originalVersion != modifiedAccount.getVersion())
             throw AppBaseException.createForOptimisticLock();
@@ -99,5 +117,10 @@ public class AccountManager implements AccountService{
         if (null != accountModifications.getLastName()) {
             modifiedAccount.setLastName(accountModifications.getLastName());
         }
+    }
+    private void setAccountActive(UUID id, boolean active) {
+        Account modifiedAccount = findById(id);
+        modifiedAccount.setActive(active);
+        accountFacade.edit(modifiedAccount);
     }
 }

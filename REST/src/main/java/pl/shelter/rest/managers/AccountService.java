@@ -27,4 +27,8 @@ public interface AccountService {
     Admin findAdminById(UUID id);
 
     List<Admin> findAllAdmins();
+    void activateAccount(UUID id);
+    void deactivateAccount(UUID id);
+    Account findAccountByLogin(String login);
+    List<Account> findAllAccounts();
 }

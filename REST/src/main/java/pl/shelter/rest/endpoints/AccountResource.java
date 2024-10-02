@@ -3,6 +3,7 @@ package pl.shelter.rest.endpoints;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import pl.shelter.dto.accounts.AccountDto;
 import pl.shelter.dto.accounts.ChangePasswordCmd;
 import pl.shelter.dto.accounts.EditAccountCmd;
 import pl.shelter.rest.converters.AccountConverter;
@@ -10,6 +11,7 @@ import pl.shelter.rest.managers.AccountService;
 import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.utils.security.HashGenerator;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -24,6 +26,11 @@ public class AccountResource {
     public AccountResource(AccountService accountService, HashGenerator hashGenerator) {
         this.accountService = accountService;
         this.hashGenerator = hashGenerator;
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<AccountDto> getAllAccounts() {
+        return AccountConverter.toDto(accountService.findAllAccounts());
     }
 
     @PUT
@@ -41,10 +48,22 @@ public class AccountResource {
         accountService.changePassword(id, changePasswordCmd.getOriginalVersion(), hashGenerator.generateHash(changePasswordCmd.getPassword()));
     }
 
+    @PUT
+    @Path("{id}/activate")
+    public void activateAccount(@PathParam("id") UUID id) {
+        accountService.activateAccount(id);
+    }
+    @PUT
+    @Path("{id}/deactivate")
+    public void deactivateAccount(@PathParam("id") UUID id) {
+        accountService.deactivateAccount(id);
+    }
+
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteAccount(@PathParam("id") UUID id) {
         accountService.removeAccount(id);
     }
+
 }
