@@ -1,16 +1,16 @@
 package pl.shelter.dto.accounts;
 
-public class EditEmployeeCmd{
+public class EditAccountCmd {
 
     private long originalVersion;
     private String firstName;
     private String lastName;
     private String email;
 
-    public EditEmployeeCmd() {
+    public EditAccountCmd() {
     }
 
-    public EditEmployeeCmd(long originalVersion, String firstName, String lastName, String email) {
+    public EditAccountCmd(long originalVersion, String firstName, String lastName, String email) {
         this.originalVersion = originalVersion;
         this.firstName = firstName;
         this.lastName = lastName;

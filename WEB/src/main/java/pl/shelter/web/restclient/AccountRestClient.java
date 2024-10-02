@@ -6,7 +6,7 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.accounts.AccountDto;
 import pl.shelter.dto.accounts.ChangePasswordCmd;
-import pl.shelter.dto.accounts.EditEmployeeCmd;
+import pl.shelter.dto.accounts.EditAccountCmd;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,9 +33,9 @@ public class AccountRestClient extends AbstractRestClient<AccountDto> {
                 .post(Entity.entity(null,MediaType.TEXT_PLAIN_TYPE));
     }
 
-    public void edit(UUID id, EditEmployeeCmd editEmployeeCmd) {
+    public void edit(UUID id, EditAccountCmd editAccountCmd) {
         getTarget().path(String.valueOf(id)).request()
-                .put(Entity.json(editEmployeeCmd));
+                .put(Entity.json(editAccountCmd));
     }
 
     public void changePassword(UUID id, ChangePasswordCmd changePasswordCmd) {

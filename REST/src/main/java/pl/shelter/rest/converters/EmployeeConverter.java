@@ -2,7 +2,7 @@ package pl.shelter.rest.converters;
 
 import pl.shelter.dto.accounts.EmployeeDto;
 import pl.shelter.dto.accounts.AddEmployeeCmd;
-import pl.shelter.dto.accounts.EditEmployeeCmd;
+import pl.shelter.dto.accounts.EditAccountCmd;
 import pl.shelter.rest.model.accounts.Employee;
 import pl.shelter.rest.model.accounts.PersonalId;
 
@@ -37,9 +37,4 @@ public class EmployeeConverter {
                 PersonalId.valueOf(addEmployeeCmd.getPersonalId()));
     }
 
-    public static Employee fromEditEmployeeCmd(EditEmployeeCmd editEmployeeCmd) {
-        return new Employee(editEmployeeCmd.getEmail(),
-                editEmployeeCmd.getFirstName(),
-                editEmployeeCmd.getLastName());
-    }
 }

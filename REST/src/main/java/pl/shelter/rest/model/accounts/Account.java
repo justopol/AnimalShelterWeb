@@ -48,6 +48,11 @@ public class Account extends AbstractEntity {
         this.lastName = lastName;
         this.personId = personId;
     }
+    public Account(String email, String firstName, String lastName) {
+        setEmail(email);
+        setFirstName(firstName);
+        setLastName(lastName);
+    }
 
     public String getRole() {
         return role;

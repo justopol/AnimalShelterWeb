@@ -1,8 +1,8 @@
 package pl.shelter.dto.accounts.adopters;
 
-import pl.shelter.dto.accounts.EditEmployeeCmd;
+import pl.shelter.dto.accounts.EditAccountCmd;
 
-public class EditAdopterCmd extends EditEmployeeCmd {
+public class EditAdopterCmd extends EditAccountCmd {
     private String streetName;
     private String streetNumber;
     private String city;

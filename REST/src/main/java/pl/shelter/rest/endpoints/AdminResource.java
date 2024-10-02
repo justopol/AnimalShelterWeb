@@ -9,7 +9,7 @@ import jakarta.ws.rs.core.Response;
 import pl.shelter.dto.accounts.AccountDto;
 import pl.shelter.dto.accounts.AddAccountCmd;
 import pl.shelter.rest.converters.AdminConverter;
-import pl.shelter.rest.managers.AdminService;
+import pl.shelter.rest.managers.AccountService;
 import pl.shelter.rest.model.accounts.Admin;
 import pl.shelter.rest.utils.ValidationMessages;
 import pl.shelter.rest.utils.security.HashGenerator;
@@ -22,19 +22,19 @@ import java.util.logging.Logger;
 public class AdminResource {
 
     private static Logger logger = Logger.getLogger(AdminResource.class.getName());
-    private AdminService adminService;
+    private AccountService accountService;
     private HashGenerator hashGenerator;
 
     @Inject
-    public AdminResource(AdminService adminService, HashGenerator hashGenerator) {
-        this.adminService = adminService;
+    public AdminResource(AccountService accountService, HashGenerator hashGenerator) {
+        this.accountService = accountService;
         this.hashGenerator = hashGenerator;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<AccountDto> getAllAdmins(){
-        return AdminConverter.toDtoFromAdmin(adminService.findAllAdmins());
+        return AdminConverter.toDtoFromAdmin(accountService.findAllAdmins());
     }
 
     @POST
@@ -44,14 +44,14 @@ public class AdminResource {
                                     @Valid AddAccountCmd addAccountCmd) {
         addAccountCmd.setPassword(hashGenerator.generateHash(addAccountCmd.getPassword()));
         Admin newAdmin = AdminConverter.fromCreateAccountCmdToAdmin(addAccountCmd);
-        return Response.ok().entity(AdminConverter.toDto(adminService.addAdmin(newAdmin))).build();
+        return Response.ok().entity(AdminConverter.toDto(accountService.addAdmin(newAdmin))).build();
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AccountDto findById(@PathParam("id") UUID id) {
-        return AdminConverter.toDto(adminService.findAdminById(id));
+        return AdminConverter.toDto(accountService.findAdminById(id));
     }
 
 }
