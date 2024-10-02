@@ -11,8 +11,8 @@ public class AdopterDto extends AccountDto {
     public AdopterDto() {
     }
 
-    public AdopterDto(UUID id, long version, String firstName, String lastName, String email, String personId, String address, String adopterType) {
-        super(id, version,firstName, lastName, email, personId);
+    public AdopterDto(UUID id, long version, String role, String login, boolean active, String firstName, String lastName, String email, String personId, String address, String adopterType) {
+        super(id, version, role, login, active, firstName, lastName, email, personId);
         this.address = address;
         this.adopterType = adopterType;
     }

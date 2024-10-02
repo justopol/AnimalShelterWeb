@@ -3,7 +3,7 @@ package pl.shelter.rest.endpoints;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import pl.shelter.dto.accounts.EmployeeDto;
+import pl.shelter.dto.accounts.AccountDto;
 import pl.shelter.dto.accounts.AddEmployeeCmd;
 import pl.shelter.rest.converters.EmployeeConverter;
 import pl.shelter.rest.managers.AccountService;
@@ -29,13 +29,13 @@ public class EmployeeResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<EmployeeDto> getAllEmployees() {
+    public List<AccountDto> getAllEmployees() {
         return EmployeeConverter.toDto(accountService.findAllEmployees());
     }
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public EmployeeDto getEmployeeById(@PathParam("id") UUID id) {
+    public AccountDto getEmployeeById(@PathParam("id") UUID id) {
         var employee = accountService.findEmployeeById(id);
         return EmployeeConverter.toDto(employee);
     }

@@ -17,6 +17,9 @@ public class AdopterConverter {
         return new AdopterDto(
                 adopter.getId(),
                 adopter.getVersion(),
+                adopter.getRole(),
+                adopter.getLogin(),
+                adopter.isActive(),
                 adopter.getFirstName(),
                 adopter.getLastName(),
                 adopter.getEmail(),

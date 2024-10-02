@@ -1,8 +1,7 @@
 package pl.shelter.rest.converters;
 
-import pl.shelter.dto.accounts.EmployeeDto;
+import pl.shelter.dto.accounts.AccountDto;
 import pl.shelter.dto.accounts.AddEmployeeCmd;
-import pl.shelter.dto.accounts.EditAccountCmd;
 import pl.shelter.rest.model.accounts.Employee;
 import pl.shelter.rest.model.accounts.PersonalId;
 
@@ -11,17 +10,20 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class EmployeeConverter {
-    public static EmployeeDto toDto(Employee employee) {
-        return new EmployeeDto(
+    public static AccountDto toDto(Employee employee) {
+        return new AccountDto(
                 employee.getId(),
                 employee.getVersion(),
+                employee.getRole(),
+                employee.getLogin(),
+                employee.isActive(),
                 employee.getFirstName(),
                 employee.getLastName(),
                 employee.getEmail(),
                 employee.getPersonId().toDtoString());
     }
 
-    public static List<EmployeeDto> toDto(List<Employee> employees) {
+    public static List<AccountDto> toDto(List<Employee> employees) {
         return null == employees ? null : employees.stream()
                 .filter(Objects::nonNull)
                 .map(EmployeeConverter::toDto)

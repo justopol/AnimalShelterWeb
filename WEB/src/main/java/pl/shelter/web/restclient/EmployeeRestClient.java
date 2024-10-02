@@ -4,15 +4,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
+import pl.shelter.dto.accounts.AccountDto;
 import pl.shelter.dto.accounts.AddAccountCmd;
-import pl.shelter.dto.accounts.AddEmployeeCmd;
-import pl.shelter.dto.accounts.EmployeeDto;
 
 @ApplicationScoped
-public class EmployeeRestClient extends AbstractRestClient<EmployeeDto> {
+public class EmployeeRestClient extends AbstractRestClient<AccountDto> {
 
     public EmployeeRestClient() {
-        super(EmployeeDto.class);
+        super(AccountDto.class);
     }
 
     @Override

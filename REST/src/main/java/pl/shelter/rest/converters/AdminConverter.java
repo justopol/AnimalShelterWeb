@@ -14,6 +14,9 @@ public class AdminConverter {
     public static AccountDto toDto(Account account) {
         return new AccountDto(account.getId(),
                 account.getVersion(),
+                account.getRole(),
+                account.getLogin(),
+                account.isActive(),
                 account.getFirstName(),
                 account.getLastName(),
                 account.getEmail(),
