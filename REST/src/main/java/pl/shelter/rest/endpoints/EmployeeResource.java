@@ -1,5 +1,6 @@
 package pl.shelter.rest.endpoints;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -40,6 +41,7 @@ public class EmployeeResource {
         return EmployeeConverter.toDto(employee);
     }
     @POST
+    @RolesAllowed({"ADMIN"})
     @Consumes(MediaType.APPLICATION_JSON)
     public void createEmployee(AddEmployeeCmd addEmployeeCmd) {
         addEmployeeCmd.setPassword(hashGenerator.generateHash(addEmployeeCmd.getPassword()));
