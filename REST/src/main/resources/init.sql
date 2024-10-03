@@ -23,7 +23,7 @@ insert into mammal (id, castrated) values ('d2f0984d-8229-4d63-a49d-a58a6e348140
 insert into mammal (id, castrated) values ('435c2a0b-c930-4a30-81d7-41f5a1292e21', true);
 
 insert into public.address (id, city, streetname, streetnumber, version) values  ('972e6e44-b0b0-497a-81d0-c5190c5b4888', 'Lodz', 'Ulicaa', '123', 0);
-insert into public.account (id, role, active, login, password, version) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b174', 'ADOPTER', true, 'Adopter1', '123', 0);
+insert into public.account (id, role, active, login, password, version) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b174', 'ADOPTER', true, 'Adopter1', '4a8904ca9d6ed04b441c893a05956351a67363a18850b1c72465f698654956b7', 0);
 insert into public.person (id, email, firstname, lastname, personalid) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b174','adopter1@wp.pl', 'Jack', 'Russel', '12345678910');
 insert into public.adopter (id, adoptertype, address_id) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b174', 'STANDARD', '972e6e44-b0b0-497a-81d0-c5190c5b4888');
 
@@ -47,7 +47,7 @@ insert into public.account (id, role, active, login, password, version) values  
 insert into public.person (id, email, firstname, lastname, personalid) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b173','adopter54@wp.pl', 'Jan', 'Kowalski', '12335679511');
 insert into public.adopter (id, adoptertype, address_id) values  ('61ac53c8-cbaf-4b02-a501-e9c48798b173', 'BLACKLISTED', '972e6e44-b0b0-497a-81d0-c5190c5b4883');
 
-insert into public.account (id, role, active, login, password, version) values  ('61ac53c8-cbaf-4b02-a501-d9c48798b175', 'EMPLOYEE', true, 'Employee1', '123', 0);
+insert into public.account (id, role, active, login, password, version) values  ('61ac53c8-cbaf-4b02-a501-d9c48798b175', 'EMPLOYEE', true, 'Employee1', 'b9c788f973a89a414bda85516b5daafb7c9ac55fd9b1eb311135f71f777686dd', 0);
 insert into public.person (id, email, firstname, lastname, personalid) values  ('61ac53c8-cbaf-4b02-a501-d9c48798b175','employee1@wp.pl', 'Emp', 'Loyee', '12345678911');
 
 insert into public.account (id, role, active, login, password, version) values  ('d7b4688f-4fdc-496d-a651-08b904a29a75', 'ADMIN', true, 'admin1', '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 1);

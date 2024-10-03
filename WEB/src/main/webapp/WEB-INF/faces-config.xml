@@ -53,5 +53,15 @@
             <to-view-id>/error/error404.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>authenticate</from-outcome>
+            <to-view-id>/login/customFormLogin.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>loginError</from-outcome>
+            <to-view-id>/login/customFormLoginError.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

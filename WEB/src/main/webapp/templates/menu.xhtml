@@ -6,7 +6,20 @@
                 xmlns:h="jakarta.faces.html">
     <h:form id="menu">
         <ul>
-            <f:subview id="employee" rendered="true">
+            <li><h:link outcome="main" >${msg["main.page"]}</h:link></li>
+            <f:subview id="menuKontoNotLoggedIn" rendered="#{empty request.remoteUser}">
+<!--                <li><h:link outcome="registerClient" >${msg["menu.register"]}</h:link></li>-->
+                <li><h:link outcome="authenticate" >${msg["menu.authenticate"]}</h:link></li>
+            </f:subview>
+            <f:subview id="menuKontoLoggedIn" rendered="#{not empty request.remoteUser}">
+                <li>${restSecurityContext.userName}</li>
+                <ul>
+<!--                    <li><h:link outcome="changeMyPassword" >${msg["menu.accounts.changePassword"]}</h:link></li>-->
+<!--                    <li><h:link outcome="detailsMyAccount" >${msg["menu.accounts.details"]}</h:link></li>-->
+                    <li><h:commandLink action="#{restSecurityContext.logout()}" value="${msg['menu.closeSession']}" /></li>
+                </ul>
+            </f:subview>
+            <f:subview id="employee" rendered="#{true and request.isUserInRole('ADMIN')}">
                 <li>${msg["ADMIN"]}</li>
                 <ul>
 <!--                    <li><h:link outcome="listClientsForRent" >${msg["menu.createRentForClient"]}</h:link></li>-->
