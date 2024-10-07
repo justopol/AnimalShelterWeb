@@ -1,8 +1,6 @@
 package pl.shelter.rest.model.adoptions;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import pl.shelter.rest.exceptions.AdopterException;
 import pl.shelter.rest.exceptions.AdoptionException;
 import pl.shelter.rest.model.AbstractEntity;
@@ -16,6 +14,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Entity
+
+@NamedQueries({
+        @NamedQuery(name = "Adoption.findByLogin", query = "select a from Adoption a join Adopter d on a.adopter.id = d.id join Account c on d.id = c.id where c.login = :login"),
+})
 public class Adoption extends AbstractEntity {
 
     private LocalDate startAdoptionTime;

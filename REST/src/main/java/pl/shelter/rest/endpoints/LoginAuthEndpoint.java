@@ -37,6 +37,7 @@ public class LoginAuthEndpoint {
     }
 
     @POST
+    @PermitAll
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateUser(@NotNull(message = ValidationMessages.ARGUMENT_NULL)

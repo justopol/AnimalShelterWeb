@@ -1,5 +1,6 @@
 package pl.shelter.rest.endpoints;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -23,6 +24,7 @@ public class AnimalResource {
     }
 
     @POST
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("mammal")
     @Consumes(MediaType.APPLICATION_JSON)
     public void createMammal(AddMammalCmd addMammalCmd) {
@@ -31,6 +33,7 @@ public class AnimalResource {
     }
 
     @PUT
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("mammal/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateMammal(@PathParam("id") UUID id,
@@ -40,6 +43,7 @@ public class AnimalResource {
     }
 
     @POST
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("reptile")
     @Consumes(MediaType.APPLICATION_JSON)
     public void createReptile(AddReptileCmd addReptileCmd) {
@@ -48,12 +52,14 @@ public class AnimalResource {
     }
 
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AnimalDto> getAnimal() {
         return AnimalConverter.toDto(animalService.getAnimals());
     }
 
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AnimalDto getAnimalById(@PathParam("id") UUID id) {
@@ -61,6 +67,7 @@ public class AnimalResource {
         return AnimalConverter.getAnimalDto(animal);
     }
     @PUT
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("reptile/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateReptile(@PathParam("id") UUID id,

@@ -1,6 +1,7 @@
 package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
+import jakarta.security.enterprise.SecurityContext;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AdoptionException;
 import pl.shelter.rest.exceptions.AppBaseException;
@@ -24,6 +25,8 @@ public class AdoptionManager implements AdoptionService{
     private AdopterFacade adopterFacade;
     @Inject
     private AnimalFacade animalFacade;
+    @Inject
+    private SecurityContext sctx;
 
     @Override
     public Adoption findById(UUID id) {
@@ -33,6 +36,11 @@ public class AdoptionManager implements AdoptionService{
     @Override
     public List<Adoption> findAll() {
         return adoptionFacade.getAdoptions();
+    }
+
+    @Override
+    public List<Adoption> findSelfAdoptions() {
+        return adoptionFacade.findByLogin(sctx.getCallerPrincipal().getName());
     }
 
     @Override

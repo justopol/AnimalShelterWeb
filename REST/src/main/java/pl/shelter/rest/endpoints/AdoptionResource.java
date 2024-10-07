@@ -1,5 +1,6 @@
 package pl.shelter.rest.endpoints;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -21,12 +22,21 @@ public class AdoptionResource {
     }
 
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AdoptionDto> getAllAdoptions() {
         return AdoptionConverter.toDto(adoptionService.findAll());
     }
+    @GET
+    @Path("self")
+   // @RolesAllowed({"ADMIN","EMPLOYEE","ADOPTER"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<AdoptionDto> getSelfAdoptions() {
+        return AdoptionConverter.toDto(adoptionService.findSelfAdoptions());
+    }
 
     @POST
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Consumes(MediaType.APPLICATION_JSON)
     public void createAdoption(AddAdoptionCmd addAdoptionCmd) {
         adoptionService.addNewAdoption(addAdoptionCmd.getAdopterUuid(), addAdoptionCmd.getAnimalUuid());
@@ -34,6 +44,7 @@ public class AdoptionResource {
     }
 
     @PUT
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}/finish")
     @Consumes(MediaType.APPLICATION_JSON)
     public void finishAdoption(@PathParam("id") UUID id) {
@@ -41,6 +52,7 @@ public class AdoptionResource {
     }
 
     @PUT
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}/cancel")
     @Consumes(MediaType.APPLICATION_JSON)
     public void cancelAdoption(@PathParam("id") UUID id) {

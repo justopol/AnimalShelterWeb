@@ -1,5 +1,6 @@
 package pl.shelter.rest.endpoints;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -32,11 +33,13 @@ public class AdopterResource {
     }
 
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AdopterDto> getAllAdopters() {
         return AdopterConverter.toDto(adopterService.findAll());
     }
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AdopterDto getAdopterById(@PathParam("id") UUID id) {
@@ -44,6 +47,7 @@ public class AdopterResource {
         return AdopterConverter.toDto(adopter);
     }
     @POST
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Consumes(MediaType.APPLICATION_JSON)
     public void createAdopter(AddAdopterCmd addAdopterCmd) {
         addAdopterCmd.setPassword(hashGenerator.generateHash(addAdopterCmd.getPassword()));
@@ -51,6 +55,7 @@ public class AdopterResource {
         adopterService.addNewAdopter(newAdopter);
     }
     @PUT
+    @RolesAllowed({"ADMIN","EMPLOYEE","ADOPTER"})
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void editAdopter(@PathParam("id") UUID id, EditAdopterCmd editAdopterCmd) {
@@ -59,6 +64,7 @@ public class AdopterResource {
     }
 
     @PUT
+    @RolesAllowed({"ADMIN"})
     @Path("{id}/status")
     @Consumes(MediaType.APPLICATION_JSON)
     public void changeStatus(@PathParam("id") UUID id, ChangeAdopterStatusCmd changeAdopterStatusCmd) {

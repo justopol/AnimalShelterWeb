@@ -29,11 +29,13 @@ public class EmployeeResource {
     }
 
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AccountDto> getAllEmployees() {
         return EmployeeConverter.toDto(accountService.findAllEmployees());
     }
     @GET
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AccountDto getEmployeeById(@PathParam("id") UUID id) {

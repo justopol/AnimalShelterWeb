@@ -1,12 +1,10 @@
 package pl.shelter.rest.repositories;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.OptimisticLockException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PersistenceException;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
+import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.model.adoptions.Adoption;
 
 import java.util.List;
@@ -46,5 +44,10 @@ public class AdoptionFacade extends AbstractEMFacade<Adoption> {
         } catch (PersistenceException pe) {
             throw AppBaseException.createForPersistenceError(pe);
         }
+    }
+    public List<Adoption> findByLogin(String login) {
+        TypedQuery<Adoption> tq = em.createNamedQuery("Adoption.findByLogin", Adoption.class);
+        tq.setParameter("login", login);
+        return tq.getResultList();
     }
 }

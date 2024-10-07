@@ -1,5 +1,6 @@
 package pl.shelter.rest.endpoints;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -32,12 +33,14 @@ public class AdminResource {
     }
 
     @GET
+    @RolesAllowed({"ADMIN"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AccountDto> getAllAdmins(){
         return AdminConverter.toDtoFromAdmin(accountService.findAllAdmins());
     }
 
     @POST
+    @RolesAllowed({"ADMIN"})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createAdmin(@NotNull(message = ValidationMessages.ARGUMENT_NULL)
@@ -48,6 +51,7 @@ public class AdminResource {
     }
 
     @GET
+    @RolesAllowed({"ADMIN"})
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AccountDto findById(@PathParam("id") UUID id) {
