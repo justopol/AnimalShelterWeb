@@ -29,7 +29,7 @@ public class EmployeeResource {
     }
 
     @GET
-    @RolesAllowed({"ADMIN","EMPLOYEE"})
+    @RolesAllowed({"ADMIN"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AccountDto> getAllEmployees() {
         return EmployeeConverter.toDto(accountService.findAllEmployees());

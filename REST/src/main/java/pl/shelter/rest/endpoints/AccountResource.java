@@ -52,13 +52,13 @@ public class AccountResource {
         accountService.changePassword(id, changePasswordCmd.getOriginalVersion(), hashGenerator.generateHash(changePasswordCmd.getPassword()));
     }
 
-    @PUT
+    @POST
     @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}/activate")
     public void activateAccount(@PathParam("id") UUID id) {
         accountService.activateAccount(id);
     }
-    @PUT
+    @POST
     @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("{id}/deactivate")
     public void deactivateAccount(@PathParam("id") UUID id) {

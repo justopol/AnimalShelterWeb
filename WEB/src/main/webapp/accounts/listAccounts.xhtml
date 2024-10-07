@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/MainTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="top">
+        <p>${msg["menu.accounts.list"]}</p>
+    </ui:define>
+
+    <ui:define name="left">
+        <ui:include src="/templates/menu.xhtml" />
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="listAccounts">
+            <h:dataTable border="1" value="#{listAccountsController.accounts}" var="account">
+                <h:column>
+                    <f:facet name="header">${msg["account.login"]}</f:facet>
+                    ${account.login}<br/>
+                    <ui:param name="role" value="${account.role}" />
+                    ${msg[role]}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["account.personalData"]}</f:facet>
+                    ${account.firstName} ${account.lastName}<br/>
+                    ${account.personId}<br/>
+                    ${account.email}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["account.active"]}</f:facet>
+                    <h:selectBooleanCheckbox value="${account.active}" disabled="true" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["general.actions"]}</f:facet>
+                    <h:commandButton action="#{listAccountsController.delete(account.id)}" onclick="return confirm(`${msg[role]} ${account.login} : ${msg['action.delete']} \\n ${msg['general.confirmAction']}`)" value="${msg['action.delete']}" rendered="${role ne 'ADOPTER'}"/>
+                    <h:commandButton action="#{listAccountsController.activate(account.id)}" value="${msg['action.activate']}" rendered="${not account.active}"/>
+                    <h:commandButton action="#{listAccountsController.deactivate(account.id)}" value="${msg['action.deactivate']}" rendered="${account.active}"/>
+                    <h:commandButton action="#{listAccountsController.edit(account.id)}" value="${msg['action.account.edit']}" />
+                    <h:commandButton action="#{listAccountsController.changePassword(account.id, account.login)}" value="${msg['action.changePassword']}" />
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="${msg['action.exit']}" action="main" immediate="true"/>
+            <h:commandButton value="${msg['action.refresh']}" action="#{listAccountsController.init()}" />
+        </h:form>
+    </ui:define>
+</ui:composition>

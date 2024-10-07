@@ -23,7 +23,7 @@ public abstract class AbstractRestClient<T extends AbstractDto> {
 
     private final Client restClient = ClientBuilder.newClient()
             .register(ApplicationClientResponseFilter.class)
-            .register(AuthenticationClientRequestFilter.class); //Maybe we shall register some filters or other config here?
+            .register(AuthenticationClientRequestFilter.class);
 
     private final WebTarget baseTarget = restClient.target("http://localhost:8080/REST-1.0-SNAPSHOT/api/");
 
@@ -32,9 +32,6 @@ public abstract class AbstractRestClient<T extends AbstractDto> {
     }
 
     protected abstract WebTarget getTarget();
-
-    // These methods are protected, because there's no "standard set" for every entity type
-    // Should you need that method for your type, override and expose method in subclass
 
     protected void create(T entity) {
         getTarget().request(MediaType.APPLICATION_JSON)
