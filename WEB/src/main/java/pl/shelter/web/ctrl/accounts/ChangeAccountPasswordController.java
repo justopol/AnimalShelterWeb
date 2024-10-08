@@ -63,15 +63,15 @@ public class ChangeAccountPasswordController implements Serializable {
         updateAccountLogin = login;
     }
 
-//    public String changeAccountPasword() {
-//        if (null == updateAccountId) {
-//            LOG.warning("changeAccountPassword form not properly initialized");
-//            return "main";
-//        }
-//        conversation.end();
-//        return changePassword(passwordDto -> accountRestClient.changePassword(updateAccountId, passwordDto),"listAccounts");
-//    }
-//
+    public String changeAccountPasword() {
+        if (null == updateAccountId) {
+            LOG.warning("changeAccountPassword form not properly initialized");
+            return "main";
+        }
+        conversation.end();
+        return changePassword(passwordDto -> accountRestClient.changePassword(updateAccountId, passwordDto),"listAccounts");
+    }
+
 //    public String changeSelfPasword() {
 //        if (!conversation.isTransient()) conversation.end();
 //        return changePassword(passwordDto -> accountRestClient.changeSelfPassword(passwordDto),"success");

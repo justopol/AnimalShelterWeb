@@ -1,7 +1,7 @@
 package pl.shelter.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
-//not_tested
+
 public class ChangePasswordDto {
     private String oldPassword;
     @NotBlank

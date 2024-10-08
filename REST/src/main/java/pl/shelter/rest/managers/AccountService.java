@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface AccountService {
 
     void editAccount(UUID uuid, long originalVersion, Account accountModifications);
-    void changePassword(UUID uuid, long originalVersion, String password);
+    void changePassword(UUID uuid, String password);
 
     void removeAccount(UUID id);
 

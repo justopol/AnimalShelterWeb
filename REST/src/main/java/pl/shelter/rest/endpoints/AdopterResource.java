@@ -4,7 +4,6 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import pl.shelter.dto.accounts.ChangePasswordCmd;
 import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
 import pl.shelter.dto.accounts.adopters.ChangeAdopterStatusCmd;

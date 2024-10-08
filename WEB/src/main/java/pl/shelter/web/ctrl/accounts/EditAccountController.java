@@ -37,6 +37,7 @@ public class EditAccountController implements Serializable {
     private String updateAccountDescription = "-";
 
     public void fetchAccountDataById(UUID id) {
+        updateAccountId = id;
         if (!conversation.isTransient()) conversation.end();
         fetchAccountData(() -> accountRestClient.find(id));
     }
@@ -51,12 +52,11 @@ public class EditAccountController implements Serializable {
         AccountDto viewUpdatedAccount = restClientInvocation.get();
         conversation.begin();
         conversation.setTimeout(1000 * 60 * 10);
-        updateAccountId = viewUpdatedAccount.getId();
         updateAccountCmd = new EditAccountCmd(
                 viewUpdatedAccount.getVersion(),
-                viewUpdatedAccount.getEmail(),
                 viewUpdatedAccount.getFirstName(),
-                viewUpdatedAccount.getLastName());
+                viewUpdatedAccount.getLastName(),
+                viewUpdatedAccount.getEmail());
         updateAccountDescription = I18nUtils.getMessage(viewUpdatedAccount.getRole()) + ": " + viewUpdatedAccount.getLogin();
     }
 

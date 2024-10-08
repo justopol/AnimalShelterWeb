@@ -68,5 +68,10 @@
             <to-view-id>/accounts/listAccounts.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>editAccount</from-outcome>
+            <to-view-id>/accounts/editAccount.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

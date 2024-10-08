@@ -5,8 +5,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.accounts.AccountDto;
-import pl.shelter.dto.accounts.ChangePasswordCmd;
 import pl.shelter.dto.accounts.EditAccountCmd;
+import pl.shelter.dto.auth.ChangePasswordDto;
 import pl.shelter.rest.converters.AccountConverter;
 import pl.shelter.rest.managers.AccountService;
 import pl.shelter.rest.model.accounts.Account;
@@ -34,6 +34,14 @@ public class AccountResource {
     public List<AccountDto> getAllAccounts() {
         return AccountConverter.toDto(accountService.findAllAccounts());
     }
+    @GET
+    @RolesAllowed({"ADMIN"})
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AccountDto getAccountById(@PathParam("id") UUID id) {
+        var res = AccountConverter.toDto(accountService.findById(id));
+        return res;
+    }
 
     @PUT
     @RolesAllowed({"ADMIN","EMPLOYEE","ADOPTER"})
@@ -48,8 +56,8 @@ public class AccountResource {
     @RolesAllowed({"ADMIN","EMPLOYEE","ADOPTER"})
     @Path("{id}/password")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void changePassword(@PathParam("id") UUID id, ChangePasswordCmd changePasswordCmd) {
-        accountService.changePassword(id, changePasswordCmd.getOriginalVersion(), hashGenerator.generateHash(changePasswordCmd.getPassword()));
+    public void changePassword(@PathParam("id") UUID id, ChangePasswordDto changePasswordDto) {
+        accountService.changePassword(id, hashGenerator.generateHash(changePasswordDto.getNewPassword()));
     }
 
     @POST

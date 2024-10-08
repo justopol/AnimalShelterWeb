@@ -38,10 +38,8 @@ public class AccountManager implements AccountService{
     }
 
     @Override
-    public void changePassword(UUID uuid, long originalVersion, String password) {
+    public void changePassword(UUID uuid, String password) {
         var account = findById(uuid);
-        if (originalVersion != account.getVersion())
-            throw AppBaseException.createForOptimisticLock();
         account.setPassword(password);
         accountFacade.edit(account);
     }
