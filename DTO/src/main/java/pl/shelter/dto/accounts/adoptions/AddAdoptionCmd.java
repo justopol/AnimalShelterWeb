@@ -1,15 +1,22 @@
 package pl.shelter.dto.accounts.adoptions;
 
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.UUID;
 
 public class AddAdoptionCmd {
 
+    @NotNull
     private UUID animalUuid;
+    @NotNull
     private UUID adopterUuid;
     public AddAdoptionCmd() {
     }
 
-    public AddAdoptionCmd(UUID animalUuid, UUID adopterUuid) {
+    @JsonbCreator
+    public AddAdoptionCmd(@JsonbProperty("animalId") UUID animalUuid, @JsonbProperty("adopterId") UUID adopterUuid) {
         this.animalUuid = animalUuid;
         this.adopterUuid = adopterUuid;
     }

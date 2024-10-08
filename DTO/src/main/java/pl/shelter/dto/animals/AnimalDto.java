@@ -1,6 +1,8 @@
 package pl.shelter.dto.animals;
 
 
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 import pl.shelter.dto.AbstractDto;
 import java.util.UUID;
 
@@ -18,7 +20,17 @@ public abstract class AnimalDto extends AbstractDto {
     public AnimalDto() {
     }
 
-    public AnimalDto(UUID id, long version, String type, boolean available, String name, int age, double adoptionPrice, String adoptionStatus) {
+//    @JsonbCreator
+//    public AnimalDto(@JsonbProperty("id") UUID id,
+//                     @JsonbProperty("version") long version,
+//                     @JsonbProperty("type") String type,
+//                     @JsonbProperty("available") boolean available,
+//                     @JsonbProperty("name") String name,
+//                     @JsonbProperty("age") int age,
+//                     @JsonbProperty("adoptionPrice") double adoptionPrice,
+//                     @JsonbProperty("adoptionStatus") String adoptionStatus) {
+
+public AnimalDto(UUID id, long version, String type, boolean available, String name, int age, double adoptionPrice, String adoptionStatus) {
         super(id, version);
         this.type = type;
         this.available = available;
@@ -75,4 +87,8 @@ public abstract class AnimalDto extends AbstractDto {
     public void setAdoptionStatus(String adoptionStatus) {
         this.adoptionStatus = adoptionStatus;
     }
+    public String getAnimalId() {
+        return getId().toString();
+    }
+
 }

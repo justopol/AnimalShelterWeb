@@ -73,5 +73,15 @@
             <to-view-id>/accounts/editAccount.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>listAdopters</from-outcome>
+            <to-view-id>/adopters/listAdoptersForAdoption.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listAnimalsToAdoptsForAdopter</from-outcome>
+            <to-view-id>/animals/listAnimalsToAdoptForAdopter.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

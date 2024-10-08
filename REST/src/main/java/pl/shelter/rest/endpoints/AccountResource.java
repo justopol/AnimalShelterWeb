@@ -39,8 +39,7 @@ public class AccountResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public AccountDto getAccountById(@PathParam("id") UUID id) {
-        var res = AccountConverter.toDto(accountService.findById(id));
-        return res;
+        return AccountConverter.toDto(accountService.findById(id));
     }
 
     @PUT

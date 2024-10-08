@@ -19,13 +19,17 @@
                     <li><h:commandLink action="#{restSecurityContext.logout()}" value="${msg['menu.closeSession']}" /></li>
                 </ul>
             </f:subview>
-            <f:subview id="employee" rendered="#{true and request.isUserInRole('ADMIN')}">
+            <f:subview id="admin" rendered="#{true and request.isUserInRole('ADMIN')}">
                 <li>${msg["ADMIN"]}</li>
                 <ul>
-<!--                    <li><h:link outcome="listClientsForRent" >${msg["menu.createRentForClient"]}</h:link></li>-->
-<!--                    <li><h:link outcome="listRents" >${msg["menu.rents.list"]}</h:link></li>-->
                     <li><h:link outcome="listAccounts" >${msg["menu.accounts.list"]}</h:link></li>
                     <li><h:link outcome="createAccount" >${msg["menu.accounts.createAccount"]}</h:link></li>
+                </ul>
+            </f:subview>
+            <f:subview id="employee" rendered="#{true and (request.isUserInRole('EMPLOYEE') or request.isUserInRole('ADMIN'))}">
+                <li>${msg["EMPLOYEE"]}</li>
+                <ul>
+                    <li><h:link outcome="listAdopters" >${msg["menu.adopters.list"]}</h:link></li>
                 </ul>
             </f:subview>
         </ul>

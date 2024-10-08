@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/MainTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="top">
+        <p>${msg["menu.createAdoptionForAdopter"]} - ${msg["menu.animals.list"]}</p>
+    </ui:define>
+
+    <ui:define name="left">
+        <ui:include src="/templates/menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages/>
+        <h:form id="listAnimals">
+            <h:dataTable border="1" value="#{adoptionAnimalController.animalsForAdoption}" var="animal">
+                <h:column>
+                    <f:facet name="header">${msg["animal.animalid"]}</f:facet>
+                    <ui:param name="type" value="${animal.type}"/>
+                    ${msg[type]} ${animal.name}<br/>
+                    ${msg['menu.age']}: ${animal.age}<br/>
+                    ${msg[animal.adoptionStatus]}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["general.actions"]}</f:facet>
+                    <h:commandButton action="#{adoptionAnimalController.adoptionAnimalForAdopter(animal.id)}"
+                                     onclick="return confirm(`${msg['menu.createAdoptionForAdopter']}: ${msg[type]} ${animal.animalId} : ${msg['general.confirmAction']}`)"
+                                     value="${msg['action.adoption']}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="${msg['action.exit']}" action="listAdoptersForAdoption" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

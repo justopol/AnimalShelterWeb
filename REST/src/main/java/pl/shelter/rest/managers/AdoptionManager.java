@@ -44,12 +44,13 @@ public class AdoptionManager implements AdoptionService{
     }
 
     @Override
-    public void addNewAdoption(UUID adopterUuid,UUID animalUuid) throws AdoptionException {
+    public Adoption addNewAdoption(UUID adopterUuid,UUID animalUuid) throws AdoptionException {
         var adopter = adopterFacade.find(adopterUuid).orElseThrow(AppBaseException::createForEntityNotFound);
         var animal = animalFacade.find(animalUuid).orElseThrow(AppBaseException::createForEntityNotFound);
         var adoption = new Adoption();
         adoption.createAdoption(LocalDate.now(),adopter,animal);
         adoptionFacade.create(adoption);
+        return adoption;
     }
 
     @Override

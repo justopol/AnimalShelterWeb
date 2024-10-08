@@ -10,7 +10,7 @@ public interface AdoptionService {
     Adoption findById(UUID id);
     List<Adoption> findAll();
     List<Adoption> findSelfAdoptions();
-    void addNewAdoption(UUID adopterUuid,UUID animalUuid) throws AdoptionException;
+    Adoption addNewAdoption(UUID adopterUuid,UUID animalUuid) throws AdoptionException;
     void finishAdoption(UUID id);
     void cancelAdoption(UUID id);
 }
