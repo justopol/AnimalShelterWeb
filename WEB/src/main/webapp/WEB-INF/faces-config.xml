@@ -83,5 +83,10 @@
             <to-view-id>/animals/listAnimalsToAdoptForAdopter.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>listAdoptions</from-outcome>
+            <to-view-id>/adoptions/listAdoptions.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

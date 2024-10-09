@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AdoptionException;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
+import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adoptions.Adoption;
 import pl.shelter.rest.model.enums.AdoptionStatus;
 import pl.shelter.rest.repositories.AdopterFacade;
@@ -34,8 +35,11 @@ public class AdoptionManager implements AdoptionService{
     }
 
     @Override
-    public List<Adoption> findAll() {
-        return adoptionFacade.getAdoptions();
+    public List<Adoption> findAdoptions(boolean includeUnderAdoption, boolean includeAdopted, UUID forAdopterId) {
+        Adopter forAdopter = (null != forAdopterId ?
+                adopterFacade.find(forAdopterId).orElseThrow(AppBaseException::createForEntityNotFound)
+                : null);
+        return adoptionFacade.matchAdoptions(includeUnderAdoption, includeAdopted, forAdopter);
     }
 
     @Override
@@ -65,5 +69,6 @@ public class AdoptionManager implements AdoptionService{
         var adoption = findById(id);
         adoption.cancelAdoption();
         adoptionFacade.edit(adoption);
+        adoptionFacade.remove(adoption);
     }
 }

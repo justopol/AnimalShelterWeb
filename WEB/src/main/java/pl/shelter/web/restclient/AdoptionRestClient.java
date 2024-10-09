@@ -36,10 +36,10 @@ public class AdoptionRestClient extends AbstractRestClient<AdoptionDto> {
                 .readEntity(AdoptionDto.class);
     }
 
-    public List<AdoptionDto> match(boolean includeCurrent, boolean includeArchive, UUID forAdopterId) {
+    public List<AdoptionDto> match(boolean includeUnderAdoption, boolean includeAdopted, UUID forAdopterId) {
         return getTarget()
-                .queryParam("includeCurrent", includeCurrent)
-                .queryParam("includeArchive", includeArchive)
+                .queryParam("includeUnderAdoption", includeUnderAdoption)
+                .queryParam("includeAdopted", includeAdopted)
                 .queryParam("forAdopterId", forAdopterId)
                 .request().get().readEntity(new GenericType<List<AdoptionDto>>() {});
     }

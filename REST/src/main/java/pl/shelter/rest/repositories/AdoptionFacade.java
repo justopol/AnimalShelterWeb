@@ -1,12 +1,18 @@
 package pl.shelter.rest.repositories;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.accounts.Account;
+import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adoptions.Adoption;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,4 +56,34 @@ public class AdoptionFacade extends AbstractEMFacade<Adoption> {
         tq.setParameter("login", login);
         return tq.getResultList();
     }
+
+    @Override
+    public void remove(Adoption entity){
+        super.remove(entity);
+    }
+
+    public List<Adoption> matchAdoptions(boolean includeUnderAdoption, boolean includeAdopted, Adopter forAdopter) {
+
+        if (!includeUnderAdoption && !includeAdopted) return new ArrayList<>();
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Adoption> query = cb.createQuery(Adoption.class);
+        Root<Adoption> from = query.from(Adoption.class);
+        query = query.select(from).orderBy(cb.desc(from.get("startadoptiontime")));
+        Predicate criteria = cb.conjunction();
+
+        if (null != forAdopter) {
+            criteria = cb.and(criteria, cb.equal(from.get("adopter_id"), forAdopter.getId()));
+        }
+        if(!includeAdopted || !includeUnderAdoption)
+            if(includeAdopted)
+                criteria = cb.and(criteria, cb.isNotNull(from.get("endadoptiontime")));
+            else
+                criteria = cb.and(criteria, cb.isNull(from.get("endadoptiontime")));
+
+        query = query.where(criteria);
+        TypedQuery<Adoption> tq = em.createQuery(query);
+        return tq.getResultList();
+    }
+
 }

@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 
 @ConversationScoped
 @Named
-public class AdoptionAnimalController implements Serializable {
+public class AdoptAnimalController implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(AdoptionAnimalController.class.getName());
+    private static final Logger LOG = Logger.getLogger(AdoptAnimalController.class.getName());
     @Inject
     private AnimalRestClient animalRestClient;
 

@@ -17,7 +17,7 @@
 
     <ui:define name="content">
         <h:form id="listAdopters">
-            <h:dataTable border="1" value="#{listAdoptersForAdoptionController.adopters}" var="adopter">
+            <h:dataTable border="1" value="#{listAdoptersController.adopters}" var="adopter">
                 <h:column>
                     <f:facet name="header">${msg["account.login"]}</f:facet>
                     ${adopter.login}<br/>
@@ -32,11 +32,11 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["general.actions"]}</f:facet>
-                    <h:commandButton action="#{listAdoptersForAdoptionController.selectForAdoption(adopter.adopterId)}" value="${msg['action.select']}" />
+                    <h:commandButton action="#{listAdoptersController.selectForAdoption(adopter.adopterId)}" value="${msg['action.select']}" />
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.exit']}" action="main" immediate="true"/>
-            <h:commandButton value="${msg['action.refresh']}" action="#{listAdoptersForAdoptionController.init()}" />
+            <h:commandButton value="${msg['action.refresh']}" action="#{listAdoptersController.init()}" />
         </h:form>
     </ui:define>
 </ui:composition>

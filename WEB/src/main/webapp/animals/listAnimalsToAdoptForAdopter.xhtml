@@ -18,7 +18,7 @@
     <ui:define name="content">
         <h:messages/>
         <h:form id="listAnimals">
-            <h:dataTable border="1" value="#{adoptionAnimalController.animalsForAdoption}" var="animal">
+            <h:dataTable border="1" value="#{adoptAnimalController.animalsForAdoption}" var="animal">
                 <h:column>
                     <f:facet name="header">${msg["animal.animalid"]}</f:facet>
                     <ui:param name="type" value="${animal.type}"/>
@@ -28,7 +28,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["general.actions"]}</f:facet>
-                    <h:commandButton action="#{adoptionAnimalController.adoptionAnimalForAdopter(animal.id.toString())}"
+                    <h:commandButton action="#{adoptAnimalController.adoptionAnimalForAdopter(animal.id.toString())}"
                                      onclick="return confirm(`${msg['menu.createAdoptionForAdopter']}: ${msg[type]} ${animal.animalId} : ${msg['general.confirmAction']}`)"
                                      value="${msg['action.adoption']}"/>
                 </h:column>

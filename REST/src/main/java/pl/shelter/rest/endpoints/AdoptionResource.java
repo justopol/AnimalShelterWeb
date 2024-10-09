@@ -10,7 +10,6 @@ import pl.shelter.dto.accounts.adoptions.AddAdoptionCmd;
 import pl.shelter.dto.accounts.adoptions.AdoptionDto;
 import pl.shelter.rest.converters.AdoptionConverter;
 import pl.shelter.rest.managers.AdoptionService;
-import pl.shelter.rest.model.adoptions.Adoption;
 import pl.shelter.rest.utils.ValidationMessages;
 
 import java.util.List;
@@ -28,8 +27,10 @@ public class AdoptionResource {
     @GET
     @RolesAllowed({"ADMIN", "EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
-    public List<AdoptionDto> getAllAdoptions() {
-        return AdoptionConverter.toDto(adoptionService.findAll());
+    public List<AdoptionDto> getAllAdoptions(@QueryParam("includeUnderAdoption") boolean includeUnderAdoption,
+                                             @QueryParam("includeAdopted") boolean includeAdopted,
+                                             @QueryParam("forAdopterId") UUID forAdopterId) {
+        return AdoptionConverter.toDto(adoptionService.findAdoptions(includeUnderAdoption,includeAdopted,forAdopterId));
     }
 
     @GET
