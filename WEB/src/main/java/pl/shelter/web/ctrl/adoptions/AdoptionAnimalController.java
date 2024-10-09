@@ -63,12 +63,13 @@ public class AdoptionAnimalController implements Serializable {
         return animalsForAdoption;
     }
 
-    public String adoptionAnimalForAdopter(UUID selectedAnimalId) {
+    public String adoptionAnimalForAdopter(String selectedAnimalIdStr) {
+        var selectedAnimalId = UUID.fromString(selectedAnimalIdStr);
         if (null == adoptioningAdopterId) {
             LOG.warning("adoptionAnimalForAdopter form not properly initialized");
             return "main";
         }
-        return adoptionAnimal(selectedAnimalId, (animalId) -> adoptionRestClient.adoptAnimalForAdopter(adoptioningAdopterId, animalId));
+        return adoptionAnimal(selectedAnimalId, (animalId) -> adoptionRestClient.adoptAnimalForAdopter(animalId, adoptioningAdopterId));
     }
 //    public String adoptionAnimalForSelf(UUID selectedAnimalId) {
 //        return adoptionAnimal(selectedAnimalId, (animalId) -> adoptionRestClient.adoptionAnimalForSelf(animalId));

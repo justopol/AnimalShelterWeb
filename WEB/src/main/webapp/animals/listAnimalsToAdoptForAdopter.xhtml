@@ -28,7 +28,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["general.actions"]}</f:facet>
-                    <h:commandButton action="#{adoptionAnimalController.adoptionAnimalForAdopter(animal.id)}"
+                    <h:commandButton action="#{adoptionAnimalController.adoptionAnimalForAdopter(animal.id.toString())}"
                                      onclick="return confirm(`${msg['menu.createAdoptionForAdopter']}: ${msg[type]} ${animal.animalId} : ${msg['general.confirmAction']}`)"
                                      value="${msg['action.adoption']}"/>
                 </h:column>

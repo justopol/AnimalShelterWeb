@@ -32,7 +32,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["general.actions"]}</f:facet>
-                    <h:commandButton action="#{listAdoptersForAdoptionController.selectForAdoption(adopter.id)}" value="${msg['action.select']}" />
+                    <h:commandButton action="#{listAdoptersForAdoptionController.selectForAdoption(adopter.adopterId)}" value="${msg['action.select']}" />
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.exit']}" action="main" immediate="true"/>

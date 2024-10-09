@@ -26,6 +26,7 @@ public class ListAdoptersForAdoptionController implements Serializable {
 
     @PostConstruct
     public void init() { //Public, because we call it from the form
+
         adopters = adopterRestClient.findAdopters();
     }
 
@@ -33,7 +34,8 @@ public class ListAdoptersForAdoptionController implements Serializable {
         return adopters;
     }
 
-    public String selectForAdoption(UUID id) {
+    public String selectForAdoption(String idStr) {
+        var id = UUID.fromString(idStr);
         adoptionAnimalController.fetchAnimalsAndSetAdoptioningAdopterId(id);
         return "listAnimalsToAdoptsForAdopter";
     }
