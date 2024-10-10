@@ -19,7 +19,7 @@
     float: left;
     background-color: #CBC0D3;
     padding: 5px;
-    width: 220px;
+    /*width: 220px;*/
     min-height: 480px;
 }
 
@@ -46,9 +46,9 @@
 
 .right_content {
     background-color: #EFD3D7;
-    padding: 5px;
-    margin: 0px 0px 0px 250px;
-    min-height: 480px;
+    /*padding: 5px;*/
+    /*margin: 0px 0px 0px 250px;*/
+    /*min-height: 480px;*/
     padding-left: 40px;
 }
 
@@ -68,4 +68,10 @@
     color: white;
   font-weight : bold;
   text-decoration : underline;    
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-column-gap: 1em;
 }

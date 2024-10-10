@@ -1,8 +1,12 @@
 package pl.shelter.web.restclient;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MediaType;
+import pl.shelter.dto.accounts.AddAccountCmd;
+import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
 
 
@@ -41,4 +45,8 @@ public class AdopterRestClient extends AbstractRestClient<AdopterDto> {
         return getTarget().path("self").request().get(AdopterDto.class);
     }
 
+    public void createAdopter(AddAdopterCmd newAdopter) {
+        getTarget().request(MediaType.APPLICATION_JSON)
+                .post(Entity.json(newAdopter));
+    }
 }

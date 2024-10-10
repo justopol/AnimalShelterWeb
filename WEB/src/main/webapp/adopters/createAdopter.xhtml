@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/MainTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="top">
+        <p>${msg["menu.adopters.createAdopter"]}</p>
+    </ui:define>
+
+    <ui:define name="left">
+        <ui:include src="/templates/menu.xhtml" />
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages />
+        <h:form id="createAdopter">
+            <h:panelGrid columns="3" border="0">
+                <h:column>${msg["account.login"]}: </h:column><h:column><h:inputText id="login" value="#{createAdopterController.newAdopter.login}"/></h:column><h:column><h:message for="login"/></h:column>
+                <h:column>${msg["account.password"]}: </h:column><h:column> #{createAdopterController.defaultPassword} </h:column><h:column> </h:column>
+                <h:column>${msg["account.email"]}: </h:column><h:column><h:inputText id="email" value="#{createAdopterController.newAdopter.email}"/></h:column><h:column><h:message for="email"/></h:column>
+                <h:column>${msg["account.firstName"]}: </h:column><h:column><h:inputText id="firstName" value="#{createAdopterController.newAdopter.firstName}"/></h:column><h:column><h:message for="firstName"/></h:column>
+                <h:column>${msg["account.lastName"]}: </h:column><h:column><h:inputText id="lastName" value="#{createAdopterController.newAdopter.lastName}"/></h:column><h:column><h:message for="lastName"/></h:column>
+                <h:column>${msg["account.personalId"]}: </h:column><h:column><h:inputText id="personalId" value="#{createAdopterController.newAdopter.personalId}"/></h:column><h:column><h:message for="personalId"/></h:column>
+                <h:column>${msg["adopter.streetName"]}: </h:column><h:column><h:inputText id="streetName" value="#{createAdopterController.newAdopter.streetName}"/></h:column><h:column><h:message for="streetName"/></h:column>
+                <h:column>${msg["adopter.streetNumber"]}: </h:column><h:column><h:inputText id="streetNumber" value="#{createAdopterController.newAdopter.streetNumber}"/></h:column><h:column><h:message for="streetNumber"/></h:column>
+                <h:column>${msg["adopter.city"]}: </h:column><h:column><h:inputText id="city" value="#{createAdopterController.newAdopter.city}"/></h:column><h:column><h:message for="city"/></h:column>
+            </h:panelGrid>
+            <p>
+                <h:commandButton action="main" value="${msg['action.cancel']}" immediate="true"/>
+                <h:commandButton action="#{createAdopterController.createAdopter()}" onclick="return confirm(`${msg['action.createAdopter']} : ${msg['general.confirmAction']}`)" style="font-weight: bold" value="${msg['action.createAdopter']}"/>
+            </p>
+        </h:form>
+    </ui:define>
+</ui:composition>
