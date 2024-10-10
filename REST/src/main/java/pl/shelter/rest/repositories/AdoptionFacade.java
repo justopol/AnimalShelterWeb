@@ -69,17 +69,17 @@ public class AdoptionFacade extends AbstractEMFacade<Adoption> {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Adoption> query = cb.createQuery(Adoption.class);
         Root<Adoption> from = query.from(Adoption.class);
-        query = query.select(from).orderBy(cb.desc(from.get("startadoptiontime")));
+        query = query.select(from).orderBy(cb.desc(from.get("startAdoptionTime")));
         Predicate criteria = cb.conjunction();
 
         if (null != forAdopter) {
-            criteria = cb.and(criteria, cb.equal(from.get("adopter_id"), forAdopter.getId()));
+            criteria = cb.and(criteria, cb.equal(from.get("adopter"), forAdopter));
         }
         if(!includeAdopted || !includeUnderAdoption)
             if(includeAdopted)
-                criteria = cb.and(criteria, cb.isNotNull(from.get("endadoptiontime")));
+                criteria = cb.and(criteria, cb.isNotNull(from.get("endAdoptionTime")));
             else
-                criteria = cb.and(criteria, cb.isNull(from.get("endadoptiontime")));
+                criteria = cb.and(criteria, cb.isNull(from.get("endAdoptionTime")));
 
         query = query.where(criteria);
         TypedQuery<Adoption> tq = em.createQuery(query);
