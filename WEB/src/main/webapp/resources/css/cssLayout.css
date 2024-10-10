@@ -19,7 +19,7 @@
     float: left;
     background-color: #CBC0D3;
     padding: 5px;
-    width: 150px;
+    width: 220px;
     min-height: 480px;
 }
 
@@ -47,8 +47,9 @@
 .right_content {
     background-color: #EFD3D7;
     padding: 5px;
-    margin: 0px 0px 0px 170px;
+    margin: 0px 0px 0px 250px;
     min-height: 480px;
+    padding-left: 40px;
 }
 
 #top a:link, #top a:visited {

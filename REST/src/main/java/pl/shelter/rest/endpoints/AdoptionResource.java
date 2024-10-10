@@ -25,12 +25,12 @@ public class AdoptionResource {
     }
 
     @GET
-//    @RolesAllowed({"ADMIN", "EMPLOYEE"})
+    @RolesAllowed({"ADMIN", "EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AdoptionDto> getAllAdoptions(@QueryParam("includeUnderAdoption") boolean includeUnderAdoption,
                                              @QueryParam("includeAdopted") boolean includeAdopted,
                                              @QueryParam("forAdopterId") UUID forAdopterId) {
-        return AdoptionConverter.toDto(adoptionService.findAdoptions(includeUnderAdoption,includeAdopted,forAdopterId));
+        return AdoptionConverter.toDto(adoptionService.findAdoptions(includeUnderAdoption, includeAdopted, forAdopterId));
     }
 
     @GET
@@ -51,18 +51,17 @@ public class AdoptionResource {
         return AdoptionConverter.toDto(adoption);
     }
 
-    @PUT
+    @POST
     @RolesAllowed({"ADMIN", "EMPLOYEE"})
     @Path("{id}/finish")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void finishAdoption(@PathParam("id") UUID id) {
+
         adoptionService.finishAdoption(id);
     }
 
-    @PUT
+    @POST
     @RolesAllowed({"ADMIN", "EMPLOYEE"})
     @Path("{id}/cancel")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void cancelAdoption(@PathParam("id") UUID id) {
         adoptionService.cancelAdoption(id);
     }

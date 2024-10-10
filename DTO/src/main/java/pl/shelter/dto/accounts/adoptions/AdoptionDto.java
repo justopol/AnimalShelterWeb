@@ -15,6 +15,7 @@ public class AdoptionDto extends AbstractDto {
     private String animalName;
     private double finalAdoptionCost;
     private String adoptionStatus;
+    private String adoptionId;
 
     public AdoptionDto() {
     }
@@ -22,6 +23,7 @@ public class AdoptionDto extends AbstractDto {
     public AdoptionDto(UUID id, long version, int adoptionDurationDays, UUID adopterId, String adopterFullName,
                        String adopterType, UUID animalId, String animalType, String animalName, double finalAdoptionCost, String adoptionStatus) {
         super(id, version);
+        this.adoptionId=id.toString();
         this.adoptionDurationDays = adoptionDurationDays;
         this.adopterId = adopterId;
         this.adopterFullName = adopterFullName;
@@ -103,5 +105,13 @@ public class AdoptionDto extends AbstractDto {
 
     public void setFinalAdoptionCost(double finalAdoptionCost) {
         this.finalAdoptionCost = finalAdoptionCost;
+    }
+
+    public String getAdoptionId() {
+        return adoptionId;
+    }
+
+    public void setAdoptionId(String adoptionId) {
+        this.adoptionId = adoptionId;
     }
 }

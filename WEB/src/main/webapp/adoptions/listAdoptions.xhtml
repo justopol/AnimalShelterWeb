@@ -24,7 +24,7 @@
                 <h:column>${msg["adoptions.selectAdopter"]}</h:column>
                 <h:column>
                     <h:selectOneListbox size="6" id="forAdopterId"  value="#{listAdoptionController.forAdopterId}">
-                        <f:selectItems value="#{listAdoptionController.adopters}" var="adopter" itemValue="${adopter.id}" itemLabel="${adopter.firstName} ${adopter.lastName} ${adopter.personId} ${adopter.email}" />
+                        <f:selectItems value="#{listAdoptionController.adopters}" var="adopter" itemValue="${adopter.id}" itemLabel="${adopter.firstName} ${adopter.lastName} ${adopter.personId}" />
                     </h:selectOneListbox>
                 </h:column>
                 <h:column></h:column><h:column><h:commandButton value="${msg['action.refresh']}" action="#{listAdoptionController.init()}"/></h:column>
@@ -45,7 +45,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["adoption.adoptionstatus"]}</f:facet>
-                    ${adoption.adoptionStatus}
+                    ${msg[adoption.adoptionStatus]}
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["adoption.value"]}</f:facet>
@@ -53,8 +53,8 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["general.actions"]}</f:facet>
-                    <h:commandButton action="#{listAdoptionController.finish(adoption.id)}" onclick="return confirm(`${msg['action.finishAdoption']}: ${adoption.animalData.animalId} : ${msg['general.confirmAction']}`)" value="${msg['action.finishAdoption']}" rendered="#{adoption.returnDate == null}" />
-                    <h:commandButton action="#{listAdoptionController.cancel(adoption.id)}" onclick="return confirm(`${msg['action.cancelAdoption']}: ${adoption.animalData.animalId} : ${msg['general.confirmAction']}`)" value="${msg['action.cancelAdoption']}"/>
+                    <h:commandButton action="#{listAdoptionController.finish(adoption.adoptionId.toString())}" onclick="return confirm(`${msg['action.finishAdoption']}: ${adoption.animalId} : ${msg['general.confirmAction']}`)" value="${msg['action.finishAdoption']}" rendered="#{adoption.adoptionStatus.equals('UNDER_ADOPTION')}" />
+                    <h:commandButton action="#{listAdoptionController.cancel(adoption.adoptionId.toString())}" onclick="return confirm(`${msg['action.cancelAdoption']}: ${adoption.animalId} : ${msg['general.confirmAction']}`)" value="${msg['action.cancelAdoption']}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.exit']}" action="main" immediate="true"/>
