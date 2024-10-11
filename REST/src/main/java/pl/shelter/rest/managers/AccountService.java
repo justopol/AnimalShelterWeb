@@ -31,4 +31,6 @@ public interface AccountService {
     void deactivateAccount(UUID id);
     Account findAccountByLogin(String login);
     List<Account> findAllAccounts();
+    Account findAccountSelf();
+    void changeSelfPassword(String hashedOldPassword, String hashedNewPassword);
 }

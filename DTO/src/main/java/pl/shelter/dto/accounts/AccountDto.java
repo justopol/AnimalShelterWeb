@@ -14,12 +14,16 @@ public class AccountDto extends AbstractDto {
     protected boolean active;
 
     protected String personId;
+    protected UUID accountId;
+    protected long accountVersion;
 
     public AccountDto() {
     }
 
     public AccountDto(UUID id, long version, String role, String login, boolean active, String firstName, String lastName, String email, String personId) {
         super(id, version);
+        this.accountId=id;
+        this.accountVersion=version;
         this.role = role;
         this.login = login;
         this.active = active;
@@ -84,5 +88,21 @@ public class AccountDto extends AbstractDto {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public UUID getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(UUID accountId) {
+        this.accountId = accountId;
+    }
+
+    public long getAccountVersion() {
+        return accountVersion;
+    }
+
+    public void setAccountVersion(long accountVersion) {
+        this.accountVersion = accountVersion;
     }
 }

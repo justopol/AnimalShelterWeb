@@ -42,18 +42,19 @@ public class EditAccountController implements Serializable {
         fetchAccountData(() -> accountRestClient.find(id));
     }
 
-//    public String fetchSelfAccountData() {
-//        if (!conversation.isTransient()) conversation.end();
-//        fetchAccountData(() -> accountRestClient.findSelf());
-//        return "editSelfAccount";
-//    }
+    public String fetchSelfAccountData() {
+        if (!conversation.isTransient()) conversation.end();
+        fetchAccountData(() -> accountRestClient.findSelf());
+        return "editAccount";
+    }
 
     private void fetchAccountData(Supplier<AccountDto> restClientInvocation) {
         AccountDto viewUpdatedAccount = restClientInvocation.get();
+        updateAccountId = viewUpdatedAccount.getAccountId();
         conversation.begin();
         conversation.setTimeout(1000 * 60 * 10);
         updateAccountCmd = new EditAccountCmd(
-                viewUpdatedAccount.getVersion(),
+                viewUpdatedAccount.getAccountVersion(),
                 viewUpdatedAccount.getFirstName(),
                 viewUpdatedAccount.getLastName(),
                 viewUpdatedAccount.getEmail());
@@ -74,11 +75,11 @@ public class EditAccountController implements Serializable {
             "listAccounts");
     }
 
-//    public String updateSelfAccount() {
-//        return updateAccount((updateAccountCmd) -> accountRestClient.edit(updateAccountId, updateAccountCmd),
-//            () -> accountRestClient.findSelf(),
-//            "success");
-//    }
+    public String updateSelfAccount() {
+        return updateAccount((updateAccountCmd) -> accountRestClient.edit(updateAccountId, updateAccountCmd),
+            () -> accountRestClient.findSelf(),
+            "success");
+    }
 
     public String updateAccount(Consumer<EditAccountCmd> restClientInvocationUpdate, Supplier<AccountDto> restClientInvocationFetch, String returnNavigationCase) {
         if (null == updateAccountId) {

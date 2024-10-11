@@ -27,7 +27,7 @@ public class EditAdopterController implements Serializable {
     @Inject
     private Conversation conversation;
 
-    private EditAdopterCmd updateAdopterCmd = new EditAdopterCmd(0, "-", "-", "-","-","-","-");
+    private EditAdopterCmd updateAdopterCmd = new EditAdopterCmd(0, "-", "-", "-", "-", "-", "-");
 
     private UUID updateAdopterId;
 
@@ -39,18 +39,19 @@ public class EditAdopterController implements Serializable {
         fetchAdopterData(() -> adopterRestClient.find(id));
     }
 
-//    public String fetchSelfAccountData() {
-//        if (!conversation.isTransient()) conversation.end();
-//        fetchAccountData(() -> accountRestClient.findSelf());
-//        return "editSelfAccount";
-//    }
+    public String fetchSelfAdopterData() {
+        if (!conversation.isTransient()) conversation.end();
+        fetchAdopterData(() -> adopterRestClient.findSelf());
+        return "editAdopterSelf";
+    }
 
     private void fetchAdopterData(Supplier<AdopterDto> restClientInvocation) {
         AdopterDto viewUpdatedAdopter = restClientInvocation.get();
+        updateAdopterId = viewUpdatedAdopter.getAccountId();
         conversation.begin();
         conversation.setTimeout(1000 * 60 * 10);
         updateAdopterCmd = new EditAdopterCmd(
-                viewUpdatedAdopter.getVersion(),
+                viewUpdatedAdopter.getAdopterVersion(),
                 viewUpdatedAdopter.getFirstName(),
                 viewUpdatedAdopter.getLastName(),
                 viewUpdatedAdopter.getEmail(),
@@ -70,15 +71,15 @@ public class EditAdopterController implements Serializable {
 
     public String updateAdopterById() {
         return updateAdopter((updateAdopterCmd) -> adopterRestClient.edit(updateAdopterId, updateAdopterCmd),
-            () -> adopterRestClient.find(updateAdopterId),
-            "listAdopters");
+                () -> adopterRestClient.find(updateAdopterId),
+                "listAdopters");
     }
 
-//    public String updateSelfAccount() {
-//        return updateAccount((updateAccountCmd) -> accountRestClient.edit(updateAccountId, updateAccountCmd),
-//            () -> accountRestClient.findSelf(),
-//            "success");
-//    }
+    public String updateSelfAdopter() {
+        return updateAdopter((updateAccountCmd) -> adopterRestClient.edit(updateAdopterId, updateAdopterCmd),
+                () -> adopterRestClient.find(updateAdopterId),
+                "success");
+    }
 
     public String updateAdopter(Consumer<EditAdopterCmd> restClientInvocationUpdate, Supplier<AdopterDto> restClientInvocationFetch, String returnNavigationCase) {
         if (null == updateAdopterId) {

@@ -10,6 +10,9 @@ import java.util.UUID;
 @Entity
 @DiscriminatorValue("ADOPTER")
 @SecondaryTable(name = "adopter")
+@NamedQueries({
+        @NamedQuery(name = "Adopter.findByLogin", query = "select a from Adopter a join Account c on a.id = c.id where c.login = :login"),
+})
 public class Adopter extends Account {
     @Enumerated(EnumType.STRING)
     @Column(table = "adopter")

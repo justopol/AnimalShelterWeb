@@ -2,6 +2,8 @@ package pl.shelter.rest.endpoints;
 
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.accounts.AccountDto;
@@ -10,6 +12,7 @@ import pl.shelter.dto.auth.ChangePasswordDto;
 import pl.shelter.rest.converters.AccountConverter;
 import pl.shelter.rest.managers.AccountService;
 import pl.shelter.rest.model.accounts.Account;
+import pl.shelter.rest.utils.ValidationMessages;
 import pl.shelter.rest.utils.security.HashGenerator;
 
 import java.util.List;
@@ -80,4 +83,20 @@ public class AccountResource {
         accountService.removeAccount(id);
     }
 
+    @GET
+    @Path("self")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
+    public AccountDto findSelf() {
+        return AccountConverter.toDto(accountService.findAccountSelf());
+    }
+    @PUT
+    @Path("self/password")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"ADMIN","EMPLOYEE","ADOPTER"})
+    public void changeSelfPassword(@NotNull(message = ValidationMessages.ARGUMENT_NULL)
+                                   @Valid ChangePasswordDto changePasswordDto) {
+        accountService.changeSelfPassword(hashGenerator.generateHash(changePasswordDto.getOldPassword()),
+                hashGenerator.generateHash(changePasswordDto.getNewPassword()));
+    }
 }

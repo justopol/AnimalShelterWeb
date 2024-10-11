@@ -3,6 +3,7 @@ package pl.shelter.rest.managers;
 import jakarta.inject.Inject;
 import jakarta.security.enterprise.SecurityContext;
 import jakarta.transaction.Transactional;
+import pl.shelter.rest.exceptions.AccountException;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.accounts.Account;
@@ -100,6 +101,19 @@ public class AccountManager implements AccountService{
     public List<Account> findAllAccounts() {
         return accountFacade.findAll();
     }
+    @Override
+    public Account findAccountSelf() {
+        return findAccountByLogin(sctx.getCallerPrincipal().getName());
+    }
+    @Override
+    public void changeSelfPassword(String hashedOldPassword, String hashedNewPassword) {
+        Account modifiedAccount = findAccountSelf();
+        if(!modifiedAccount.getPassword().equals(hashedOldPassword))
+            throw AccountException.createForOldPasswordMismatch();
+        modifiedAccount.setPassword(hashedNewPassword);
+        accountFacade.edit(modifiedAccount);
+    }
+
 
 
     private static void editAccount(long originalVersion, Account accountModifications, Account modifiedAccount) {
@@ -121,4 +135,5 @@ public class AccountManager implements AccountService{
         modifiedAccount.setActive(active);
         accountFacade.edit(modifiedAccount);
     }
+
 }

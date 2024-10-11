@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/MainTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="top">
+        <p>${msg["action.account.edit"]}: ${editAdopterController.updateAdopterDescription}</p>
+    </ui:define>
+
+    <ui:define name="left">
+        <ui:include src="/templates/menu.xhtml" />
+    </ui:define>
+
+    <ui:define name="content">
+            <h:messages />
+            <h:form id="editAdopterSelf">
+                <p>${msg["action.account.edit"]}: ${editAdopterController.updateAdopterDescription}</p>
+                <h:panelGrid columns="3" border="0">
+                    <h:column>${msg["account.firstName"]} </h:column><h:column><h:inputText id="firstName" value="#{editAdopterController.updateAdopterCmd.firstName}"/></h:column><h:column><h:message for="firstName"/></h:column>
+                    <h:column>${msg["account.lastName"]} </h:column><h:column><h:inputText id="lastName" value="#{editAdopterController.updateAdopterCmd.lastName}"/></h:column><h:column><h:message for="lastName"/></h:column>
+                    <h:column>${msg["account.email"]} </h:column><h:column><h:inputText id="email" value="#{editAdopterController.updateAdopterCmd.email}"/></h:column><h:column><h:message for="email"/></h:column>
+                    <h:column>${msg["adopter.streetName"]}: </h:column><h:column><h:inputText id="streetName" value="#{editAdopterController.updateAdopterCmd.streetName}"/></h:column><h:column><h:message for="streetName"/></h:column>
+                    <h:column>${msg["adopter.streetNumber"]}: </h:column><h:column><h:inputText id="streetNumber" value="#{editAdopterController.updateAdopterCmd.streetNumber}"/></h:column><h:column><h:message for="streetNumber"/></h:column>
+                    <h:column>${msg["adopter.city"]}: </h:column><h:column><h:inputText id="city" value="#{editAdopterController.updateAdopterCmd.city}"/></h:column><h:column><h:message for="city"/></h:column>
+                </h:panelGrid>
+                <p>
+                    <h:commandButton action="#{editAdopterController.updateSelfAdopter()}" onclick="return confirm(`${msg['action.account.edit']} : ${editAdopterController.updateAdopterDescription} \\n ${msg['general.confirmAction']}`)" style="font-weight: bold" value="${msg['action.edit']}"/>
+                    <h:commandButton action="listAdopters" value="${msg['action.cancel']}" immediate="true"/>
+                </p>
+            </h:form>
+    </ui:define>
+</ui:composition>

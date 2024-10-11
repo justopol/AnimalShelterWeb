@@ -22,6 +22,9 @@ public class AccountRestClient extends AbstractRestClient<AccountDto> {
     protected WebTarget getTarget() {
         return getBaseTarget().path("accounts");
     }
+    public AccountDto findSelf() {
+        return getTarget().path("self").request().get(AccountDto.class);
+    }
 
     public void activate(UUID id) {
         getTarget().path(String.valueOf(id)).path("activate").request()
@@ -40,6 +43,10 @@ public class AccountRestClient extends AbstractRestClient<AccountDto> {
 
     public void changePassword(UUID id, ChangePasswordDto changePasswordDto) {
         getTarget().path(String.valueOf(id)).path("password").request()
+                .put(Entity.json(changePasswordDto));
+    }
+    public void changeSelfPassword(ChangePasswordDto changePasswordDto) {
+        getTarget().path("self").path("password").request()
                 .put(Entity.json(changePasswordDto));
     }
 

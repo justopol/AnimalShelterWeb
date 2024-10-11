@@ -72,10 +72,10 @@ public class ChangeAccountPasswordController implements Serializable {
         return changePassword(passwordDto -> accountRestClient.changePassword(updateAccountId, passwordDto),"listAccounts");
     }
 
-//    public String changeSelfPasword() {
-//        if (!conversation.isTransient()) conversation.end();
-//        return changePassword(passwordDto -> accountRestClient.changeSelfPassword(passwordDto),"success");
-//    }
+    public String changeSelfPasword() {
+        if (!conversation.isTransient()) conversation.end();
+        return changePassword(passwordDto -> accountRestClient.changeSelfPassword(passwordDto),"success");
+    }
 
     private String changePassword(Consumer<ChangePasswordDto> restClientInvocation, String returnNavigationCase) {
         if (changePasswordDto.getNewPassword().equals(passwordRepeat)) {

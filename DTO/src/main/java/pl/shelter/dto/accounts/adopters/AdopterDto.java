@@ -12,12 +12,15 @@ public class AdopterDto extends AccountDto {
     private String streetNumber;
     private String city;
 
+    protected long adopterVersion;
+
     public AdopterDto() {
     }
 
     public AdopterDto(UUID id, long version, String role, String login, boolean active, String firstName, String lastName, String email, String personId, String address, String adopterType, String streetName, String streetNumber, String city) {
         super(id, version, role, login, active, firstName, lastName, email, personId);
         this.adopterId = id.toString();
+        this.adopterVersion=version;
         this.address = address;
         this.adopterType = adopterType;
         this.streetName = streetName;
@@ -71,5 +74,13 @@ public class AdopterDto extends AccountDto {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public long getAdopterVersion() {
+        return adopterVersion;
+    }
+
+    public void setAdopterVersion(long adopterVersion) {
+        this.adopterVersion = adopterVersion;
     }
 }

@@ -18,4 +18,8 @@ public interface AdopterService {
     void editStatusOfAdopter(UUID id, AdopterType adopterType);
 
     void changePassword(UUID uuid, long originalVersion, String password);
+
+    Adopter findAdopterSelf();
+
+    Adopter findAdopterByLogin(String login);
 }

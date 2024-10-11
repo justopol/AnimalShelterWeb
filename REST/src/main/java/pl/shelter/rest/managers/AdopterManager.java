@@ -2,6 +2,7 @@ package pl.shelter.rest.managers;
 
 import jakarta.inject.Inject;
 import jakarta.persistence.PersistenceException;
+import jakarta.security.enterprise.SecurityContext;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AdopterException;
 import pl.shelter.rest.exceptions.AppBaseException;
@@ -23,6 +24,9 @@ public class AdopterManager implements AdopterService {
     private AdopterFacade adopterFacade;
     @Inject
     private AddressFacade addressFacade;
+    @Inject
+    private SecurityContext sctx;
+
 
     @Override
     public Adopter findById(UUID id) {
@@ -64,6 +68,14 @@ public class AdopterManager implements AdopterService {
         if (originalVersion != adopter.getVersion()) throw AppBaseException.createForOptimisticLock();
         adopter.setPassword(password);
         adopterFacade.edit(adopter);
+    }
+    @Override
+    public Adopter findAdopterSelf() {
+        return findAdopterByLogin(sctx.getCallerPrincipal().getName());
+    }
+    @Override
+    public Adopter findAdopterByLogin(String login) {
+        return adopterFacade.findByLogin(login).orElseThrow(AppBaseException::createForEntityNotFound);
     }
 
     private void editAdopter(long originalVersion, Adopter adopterModifications, Adopter modifiedAdopter) {

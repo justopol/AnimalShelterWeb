@@ -70,4 +70,11 @@ public class AdopterResource {
         AdopterType newAdopterType = AdopterConverter.fromString(changeAdopterStatusCmd.getAdopterType());
         adopterService.editStatusOfAdopter(id, newAdopterType);
     }
+    @GET
+    @Path("self")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"ADOPTER"})
+    public AdopterDto findSelf() {
+        return AdopterConverter.toDto(adopterService.findAdopterSelf());
+    }
 }

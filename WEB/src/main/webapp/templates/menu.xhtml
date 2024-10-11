@@ -14,8 +14,7 @@
             <f:subview id="menuKontoLoggedIn" rendered="#{not empty request.remoteUser}">
                 <li>${restSecurityContext.userName}</li>
                 <ul>
-<!--                    <li><h:link outcome="changeMyPassword" >${msg["menu.accounts.changePassword"]}</h:link></li>-->
-<!--                    <li><h:link outcome="detailsMyAccount" >${msg["menu.accounts.details"]}</h:link></li>-->
+                    <li><h:link outcome="changeSelfPassword" >${msg["menu.account.changeSelfPassword"]}</h:link></li>
                     <li><h:commandLink action="#{restSecurityContext.logout()}" value="${msg['menu.closeSession']}" /></li>
                 </ul>
             </f:subview>
@@ -32,6 +31,15 @@
                     <li><h:link outcome="listAdopters" >${msg["menu.adopters.list"]}</h:link></li>
                     <li><h:link outcome="listAdoptions" >${msg["menu.adoptions.list"]}</h:link></li>
                     <li><h:link outcome="createAdopter" >${msg["menu.adopter.create"]}</h:link></li>
+                    <li><h:commandLink action="#{editAccountController.fetchSelfAccountData()}" >${msg["menu.account.editSelf"]}</h:commandLink></li>
+                </ul>
+            </f:subview>
+            <f:subview id="adopter" rendered="#{true and request.isUserInRole('ADOPTER')}">
+                <li>${msg["ADOPTER"]}</li>
+                <ul>
+                    <li><h:link outcome="listAdopters" >${msg["menu.adopters.list"]}</h:link></li>
+                    <li><h:link outcome="listAdoptions" >${msg["menu.adoptions.list"]}</h:link></li>
+                    <li><h:commandLink action="#{editAdopterController.fetchSelfAdopterData()}" >${msg["menu.account.editSelf"]}</h:commandLink></li>
                 </ul>
             </f:subview>
         </ul>

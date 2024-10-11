@@ -1,9 +1,6 @@
 package pl.shelter.rest.repositories;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.OptimisticLockException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PersistenceException;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
@@ -48,6 +45,15 @@ public class AdopterFacade extends AbstractEMFacade<Adopter> {
             throw AppBaseException.createForOptimisticLock(ole);
         } catch (PersistenceException pe) {
             throw AppBaseException.createForPersistenceError(pe);
+        }
+    }
+    public Optional<Adopter> findByLogin(String login) {
+        TypedQuery<Adopter> tq = em.createNamedQuery("Adopter.findByLogin", Adopter.class);
+        tq.setParameter("login", login);
+        try {
+            return Optional.of(tq.getSingleResult());
+        } catch (NoResultException nre) {
+            return Optional.empty();
         }
     }
 }

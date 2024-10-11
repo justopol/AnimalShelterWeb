@@ -98,5 +98,15 @@
             <to-view-id>/adopters/editAdopter.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>changeSelfPassword</from-outcome>
+            <to-view-id>/accounts/changeSelfPassword.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editAdopterSelf</from-outcome>
+            <to-view-id>/adopters/editAdopterSelf.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>
