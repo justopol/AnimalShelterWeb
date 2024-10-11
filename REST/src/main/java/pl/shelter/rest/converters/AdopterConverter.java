@@ -25,7 +25,10 @@ public class AdopterConverter {
                 adopter.getEmail(),
                 adopter.getPersonId().toDtoString(),
                 adopter.getAddress().toDtoString(),
-                adopter.getAdopterType().name());
+                adopter.getAdopterType().name(),
+                adopter.getAddress().getStreetName(),
+                adopter.getAddress().getStreetNumber(),
+                adopter.getAddress().getCity());
     }
 
     public static List<AdopterDto> toDto(List<Adopter> adopters) {

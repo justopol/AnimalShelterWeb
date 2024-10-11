@@ -6,8 +6,10 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import pl.shelter.dto.accounts.AddAccountCmd;
+import pl.shelter.dto.accounts.EditAccountCmd;
 import pl.shelter.dto.accounts.adopters.AddAdopterCmd;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
+import pl.shelter.dto.accounts.adopters.EditAdopterCmd;
 
 
 import java.util.List;
@@ -48,5 +50,9 @@ public class AdopterRestClient extends AbstractRestClient<AdopterDto> {
     public void createAdopter(AddAdopterCmd newAdopter) {
         getTarget().request(MediaType.APPLICATION_JSON)
                 .post(Entity.json(newAdopter));
+    }
+    public void edit(UUID id, EditAdopterCmd editAdopterCmd) {
+        getTarget().path(String.valueOf(id)).request()
+                .put(Entity.json(editAdopterCmd));
     }
 }

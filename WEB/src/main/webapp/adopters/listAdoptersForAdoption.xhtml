@@ -28,11 +28,13 @@
                     ${adopter.personId}<br/>
                     ${adopter.email}<br/>
                     ${adopter.address}<br/>
-                    ${adopter.adopterType}
+                    ${msg[adopter.adopterType]}
+                    ${msg[adoption.adoptionStatus]}
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["general.actions"]}</f:facet>
                     <h:commandButton action="#{listAdoptersController.selectForAdoption(adopter.adopterId)}" value="${msg['action.select']}" />
+                    <h:commandButton action="#{listAdoptersController.edit(adopter.adopterId)}" value="${msg['action.account.edit']}" />
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.exit']}" action="main" immediate="true"/>

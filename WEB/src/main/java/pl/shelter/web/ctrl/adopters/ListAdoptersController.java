@@ -21,12 +21,13 @@ public class ListAdoptersController implements Serializable {
 
     @Inject
     private AdoptAnimalController listAdoptionController;
+    @Inject
+    private EditAdopterController editAdopterController;
 
     private List<AdopterDto> adopters;
 
     @PostConstruct
-    public void init() { //Public, because we call it from the form
-
+    public void init() {
         adopters = adopterRestClient.findAdopters();
     }
 
@@ -38,6 +39,11 @@ public class ListAdoptersController implements Serializable {
         var id = UUID.fromString(idStr);
         listAdoptionController.fetchAnimalsAndSetAdoptioningAdopterId(id);
         return "listAnimalsToAdoptsForAdopter";
+    }
+
+    public String edit(String id) {
+        editAdopterController.fetchAdopterDataById(UUID.fromString(id));
+        return "editAdopter";
     }
 
 }
