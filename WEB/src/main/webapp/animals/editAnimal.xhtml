@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/MainTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="top">
+        <p>${msg["action.animal.edit"]}: ${editAnimalController.updateAnimalDescription}</p>
+    </ui:define>
+
+    <ui:define name="left">
+        <ui:include src="/templates/menu.xhtml" />
+    </ui:define>
+
+    <ui:define name="content">
+            <h:messages />
+            <h:form id="editAnimal">
+                <p>${msg["action.animal.edit"]}: ${editAnimalController.updateAnimalDescription}</p>
+                <h:panelGrid columns="3" border="0">
+                    <h:column>${msg["animal.age"]} </h:column><h:column><h:inputText type="number" id="age" value="#{editAnimalController.updateAnimalCmd.age}"/></h:column><h:column><h:message for="age"/></h:column>
+                    <h:column>${msg["animal.name"]} </h:column><h:column><h:inputText id="name" value="#{editAnimalController.updateAnimalCmd.name}"/></h:column><h:column><h:message for="name"/></h:column>
+                    <h:column>${msg["animal.castrated"]}</h:column>
+                    <h:column>
+                        <h:selectOneListbox size="3" id="forCastratedId"  value="#{editAnimalController.forCastratedId}">
+                            <f:selectItems value="#{editAnimalController.castratedTypes}" var="type" itemValue="${type}" itemLabel= "${msg[type]}"/>
+                        </h:selectOneListbox>
+                    </h:column>
+                </h:panelGrid>
+                <p>
+                    <h:commandButton action="#{editAnimalController.updateAnimalById()}" onclick="return confirm(`${msg['action.animal.edit']} : ${editAnimalController.updateAnimalDescription} \\n ${msg['general.confirmAction']}`)" style="font-weight: bold" value="${msg['action.edit']}"/>
+                    <h:commandButton action="listAnimals" value="${msg['action.cancel']}" immediate="true"/>
+                </p>
+            </h:form>
+    </ui:define>
+</ui:composition>

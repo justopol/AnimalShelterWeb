@@ -1,10 +1,13 @@
 package pl.shelter.web.restclient;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
+import pl.shelter.dto.accounts.EditAccountCmd;
 import pl.shelter.dto.animals.AnimalDto;
+import pl.shelter.dto.animals.EditAnimalCmd;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +32,10 @@ public class AnimalRestClient extends AbstractRestClient<AnimalDto> {
     @Override
     public AnimalDto find(UUID id) {
         return super.find(id);
+    }
+    public void edit(UUID id, EditAnimalCmd editAnimalCmd,String group) {
+        getTarget().path(group).path(String.valueOf(id)).request()
+                .put(Entity.json(editAnimalCmd));
     }
 
 }

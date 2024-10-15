@@ -19,12 +19,15 @@ public class AnimalDto extends AbstractDto {
     private double adoptionPrice;
     protected String adoptionStatus;
     protected String castrated;
-
+    protected long animalVersion;
+    protected UUID animalId;
     public AnimalDto() {
     }
 
 public AnimalDto(UUID id, long version, String type, boolean available, String name, int age, double adoptionPrice, String adoptionStatus, Castrated castrated) {
         super(id, version);
+        this.animalId = id;
+        this.animalVersion = version;
         this.type = type;
         this.available = available;
         this.name = name;
@@ -81,9 +84,6 @@ public AnimalDto(UUID id, long version, String type, boolean available, String n
     public void setAdoptionStatus(String adoptionStatus) {
         this.adoptionStatus = adoptionStatus;
     }
-    public String getAnimalId() {
-        return getId().toString();
-    }
 
     public String getCastrated() {
         return castrated;
@@ -91,5 +91,21 @@ public AnimalDto(UUID id, long version, String type, boolean available, String n
 
     public void setCastrated(String castrated) {
         this.castrated = castrated;
+    }
+
+    public long getAnimalVersion() {
+        return animalVersion;
+    }
+
+    public void setAnimalVersion(long animalVersion) {
+        this.animalVersion = animalVersion;
+    }
+
+    public void setAnimalId(UUID animalId) {
+        this.animalId = animalId;
+    }
+
+    public UUID getAnimalId() {
+        return animalId;
     }
 }

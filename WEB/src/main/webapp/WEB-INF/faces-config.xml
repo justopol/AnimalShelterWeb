@@ -108,5 +108,15 @@
             <to-view-id>/adopters/editAdopterSelf.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>listAnimals</from-outcome>
+            <to-view-id>/animals/listAnimals.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editAnimal</from-outcome>
+            <to-view-id>/animals/editAnimal.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

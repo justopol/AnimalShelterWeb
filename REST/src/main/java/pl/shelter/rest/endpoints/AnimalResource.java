@@ -52,7 +52,7 @@ public class AnimalResource {
     }
 
     @GET
-    //@RolesAllowed({"ADMIN","EMPLOYEE"})
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AnimalDto> getAnimal() {
         return AnimalConverter.toDto(animalService.getAnimals());
