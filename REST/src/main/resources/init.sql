@@ -6,7 +6,7 @@ insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, vers
 insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, version) values  ('f0192792-1888-4290-8bda-94b18a1c9172', 'Reptile', 0, 10, 20, 'Tecza', 'lizard', 1);
 insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, version) values  ('dbb114f6-c14c-4bbf-afe3-e6998a300d10', 'Reptile', 2, 2, 20, 'Bazyliszek', 'snake', 1);
 insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, version, ) values ('435c2a0b-c930-4a30-81d7-41f5a1292e21', 'Mammal', 2, 5, 20, 'Bary', 'dog', 1);
-insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, version) values  ('dbb114f6-c14c-4bbf-afe3-e6998a300d15', 'Reptile', 1, 3, 20, 'Bay', 'snake', 1);
+insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, version) values  ('dbb114f6-c14c-4bbf-afe3-e6998a300d15', 'Reptile', 1, 3, 20, 'Lolek', 'snake', 1);
 insert into animal (id, dtype, adoptionstatus, age, basicprice, name, type, version) values  ('dbb114f7-c14c-4bbf-afe3-e6998a300d16', 'Reptile', 2, 4, 20, 'Bays', 'snake', 1);
 
 
@@ -55,7 +55,6 @@ insert into public.person (id, email, firstname, lastname, personalid) values  (
 
 insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc6', '2024-09-20', 20, '2024-09-17', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b174', 'dbb114f6-c14c-4bbf-afe3-e6998a300d10');
 insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc8', null, 20.12, '2024-09-25', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b174', 'dbb114f6-c14c-4bbf-afe3-e6998a300d15');
-insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc5', '2025-09-15', null, '2024-09-24', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b173', 'dbb114f6-c14c-4bbf-afe3-e6998a300d15');
 insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc4', null, 40, '2024-09-28', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b175', '666c005c-0d27-4187-a682-567e390a0639');
-insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc3', null, 40, '2024-10-29', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b171', 'dbb114f7-c14c-4bbf-afe3-e6998a300d16');
+insert into public.adoption (id, endadoptiontime, finaladoptioncost, startadoptiontime, version, adopter_id, animal_id) values  ('74fed3b7-d3f4-492b-814f-11dfaf358fc3', '2023-11-05', 40, '2023-10-29', 0, '61ac53c8-cbaf-4b02-a501-e9c48798b171', 'dbb114f7-c14c-4bbf-afe3-e6998a300d16');
 

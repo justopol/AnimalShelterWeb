@@ -41,7 +41,8 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["adoption.adoptiondate"]}</f:facet>
-                    ${adoption.adoptionDurationDays}
+                    ${msg["adoption.startTime"]}: ${adoption.startAdoptionTime}<br/>
+                    ${msg["adoption.daysElapsed"]}: ${adoption.adoptionDurationDays}
                 </h:column>
                 <h:column>
                     <f:facet name="header">${msg["adoption.adoptionstatus"]}</f:facet>

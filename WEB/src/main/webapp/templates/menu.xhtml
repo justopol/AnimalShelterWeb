@@ -32,13 +32,14 @@
                     <li><h:link outcome="listAdoptions" >${msg["menu.adoptions.list"]}</h:link></li>
                     <li><h:link outcome="createAdopter" >${msg["menu.adopter.create"]}</h:link></li>
                     <li><h:commandLink action="#{editAccountController.fetchSelfAccountData()}" >${msg["menu.account.editSelf"]}</h:commandLink></li>
+                    <li>*Lista zwierząt*</li>
+                    <li>*Utwórz zwierzę*</li>
                 </ul>
             </f:subview>
             <f:subview id="adopter" rendered="#{true and request.isUserInRole('ADOPTER')}">
                 <li>${msg["ADOPTER"]}</li>
                 <ul>
-                    <li><h:link outcome="listAdopters" >${msg["menu.adopters.list"]}</h:link></li>
-                    <li><h:link outcome="listAdoptions" >${msg["menu.adoptions.list"]}</h:link></li>
+                    <li>*Lista własnych adopcji*</li>
                     <li><h:commandLink action="#{editAdopterController.fetchSelfAdopterData()}" >${msg["menu.account.editSelf"]}</h:commandLink></li>
                 </ul>
             </f:subview>

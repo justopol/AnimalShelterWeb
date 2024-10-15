@@ -2,6 +2,7 @@ package pl.shelter.dto.accounts.adoptions;
 
 import pl.shelter.dto.AbstractDto;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class AdoptionDto extends AbstractDto {
@@ -16,12 +17,14 @@ public class AdoptionDto extends AbstractDto {
     private double finalAdoptionCost;
     private String adoptionStatus;
     private String adoptionId;
+    private LocalDate startAdoptionTime;
 
     public AdoptionDto() {
     }
 
     public AdoptionDto(UUID id, long version, int adoptionDurationDays, UUID adopterId, String adopterFullName,
-                       String adopterType, UUID animalId, String animalType, String animalName, double finalAdoptionCost, String adoptionStatus) {
+                       String adopterType, UUID animalId, String animalType, String animalName, double finalAdoptionCost,
+                       String adoptionStatus, LocalDate startAdoptionTime) {
         super(id, version);
         this.adoptionId=id.toString();
         this.adoptionDurationDays = adoptionDurationDays;
@@ -33,6 +36,7 @@ public class AdoptionDto extends AbstractDto {
         this.animalName = animalName;
         this.finalAdoptionCost = finalAdoptionCost;
         this.adoptionStatus=adoptionStatus;
+        this.startAdoptionTime=startAdoptionTime;
     }
 
     public String getAdoptionStatus() {
@@ -113,5 +117,13 @@ public class AdoptionDto extends AbstractDto {
 
     public void setAdoptionId(String adoptionId) {
         this.adoptionId = adoptionId;
+    }
+
+    public LocalDate getStartAdoptionTime() {
+        return startAdoptionTime;
+    }
+
+    public void setStartAdoptionTime(LocalDate startAdoptionTime) {
+        this.startAdoptionTime = startAdoptionTime;
     }
 }

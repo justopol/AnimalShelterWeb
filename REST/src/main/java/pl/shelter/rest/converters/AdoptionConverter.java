@@ -20,7 +20,8 @@ public class AdoptionConverter {
                 adoption.getAnimal().getType(),
                 adoption.getAnimal().getName(),
                 adoption.getFinalAdoptionCost(),
-                adoption.getAnimal().getAdoptionStatus().toString()
+                adoption.getAnimal().getAdoptionStatus().toString(),
+                adoption.getStartAdoptionTime()
                );
     }
     public static List<AdoptionDto> toDto(List<Adoption> adoptions) {

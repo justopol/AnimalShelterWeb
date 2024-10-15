@@ -4,9 +4,11 @@ package pl.shelter.dto.animals;
 import jakarta.json.bind.annotation.JsonbCreator;
 import jakarta.json.bind.annotation.JsonbProperty;
 import pl.shelter.dto.AbstractDto;
+import pl.shelter.dto.enums.Castrated;
+
 import java.util.UUID;
 
-public abstract class AnimalDto extends AbstractDto {
+public class AnimalDto extends AbstractDto {
 
     private String type;
 
@@ -16,21 +18,12 @@ public abstract class AnimalDto extends AbstractDto {
     private int age;
     private double adoptionPrice;
     protected String adoptionStatus;
+    protected String castrated;
 
     public AnimalDto() {
     }
 
-//    @JsonbCreator
-//    public AnimalDto(@JsonbProperty("id") UUID id,
-//                     @JsonbProperty("version") long version,
-//                     @JsonbProperty("type") String type,
-//                     @JsonbProperty("available") boolean available,
-//                     @JsonbProperty("name") String name,
-//                     @JsonbProperty("age") int age,
-//                     @JsonbProperty("adoptionPrice") double adoptionPrice,
-//                     @JsonbProperty("adoptionStatus") String adoptionStatus) {
-
-public AnimalDto(UUID id, long version, String type, boolean available, String name, int age, double adoptionPrice, String adoptionStatus) {
+public AnimalDto(UUID id, long version, String type, boolean available, String name, int age, double adoptionPrice, String adoptionStatus, Castrated castrated) {
         super(id, version);
         this.type = type;
         this.available = available;
@@ -38,6 +31,7 @@ public AnimalDto(UUID id, long version, String type, boolean available, String n
         this.age = age;
         this.adoptionPrice = adoptionPrice;
         this.adoptionStatus = adoptionStatus;
+        this.castrated=castrated.toString();
     }
 
     public String getType() {
@@ -91,4 +85,11 @@ public AnimalDto(UUID id, long version, String type, boolean available, String n
         return getId().toString();
     }
 
+    public String getCastrated() {
+        return castrated;
+    }
+
+    public void setCastrated(String castrated) {
+        this.castrated = castrated;
+    }
 }

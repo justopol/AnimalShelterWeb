@@ -2,6 +2,7 @@ package pl.shelter.rest.converters;
 
 import org.jetbrains.annotations.NotNull;
 import pl.shelter.dto.animals.*;
+import pl.shelter.dto.enums.Castrated;
 import pl.shelter.rest.model.animals.Animal;
 import pl.shelter.rest.model.animals.Mammal;
 import pl.shelter.rest.model.animals.Reptile;
@@ -25,8 +26,12 @@ public class AnimalConverter {
                 editMammalCmd.isCastrated());
     }
 
-    public static MammalDto toDto(Mammal mammal) {
-        return new MammalDto(mammal.getId(),
+    public static AnimalDto toDto(Mammal mammal) {
+        Castrated castrated;
+        if (mammal.isCastrated()){
+            castrated=Castrated.CASTRATED;
+        }else castrated=Castrated.NOT_CASTRATED;
+        return new AnimalDto(mammal.getId(),
                 mammal.getVersion(),
                 mammal.getType(),
                 mammal.isReadyForAdoption(),
@@ -34,18 +39,19 @@ public class AnimalConverter {
                 mammal.getAge(),
                 mammal.getAdoptionPrice(),
                 mammal.getAdoptionStatus().name(),
-                mammal.isCastrated());
+                castrated);
     }
 
-    public static ReptileDto toDto(Reptile reptile) {
-        return new ReptileDto(reptile.getId(),
+    public static AnimalDto toDto(Reptile reptile) {
+        return new AnimalDto(reptile.getId(),
                 reptile.getVersion(),
                 reptile.getType(),
                 reptile.isReadyForAdoption(),
                 reptile.getName(),
                 reptile.getAge(),
                 reptile.getAdoptionPrice(),
-                reptile.getAdoptionStatus().name());
+                reptile.getAdoptionStatus().name(),
+                Castrated.NOT_POSSESS);
     }
 
     public static List<AnimalDto> toDto(List<Animal> animals) {

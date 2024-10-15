@@ -97,4 +97,7 @@ public class Adoption extends AbstractEntity {
         return finalAdoptionCost;
     }
 
+    public LocalDate getStartAdoptionTime() {
+        return startAdoptionTime;
+    }
 }
