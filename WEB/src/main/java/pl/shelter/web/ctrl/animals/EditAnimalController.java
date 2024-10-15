@@ -28,12 +28,12 @@ public class EditAnimalController implements Serializable {
     @Inject
     private Conversation conversation;
 
-    private EditAnimalCmd updateAnimalCmd = new EditAnimalCmd(0, "-",0, "-", "NOT_POSSESS");
+    private EditAnimalCmd updateAnimalCmd = new EditAnimalCmd(0, "-",0, "-", false);
 
     private UUID updateAnimalId;
 
     private String updateAnimalDescription = "-";
-    private String forCastratedId;
+    private boolean castrated;
     private String group;
     private ArrayList<String> castratedTypes=new ArrayList<>(Arrays.asList(Castrated.CASTRATED.toString(),Castrated.NOT_CASTRATED.toString(),Castrated.NOT_POSSESS.toString()));
     private Map<String,String> map = AnimalType.getAnimalTypes();
@@ -49,6 +49,7 @@ public class EditAnimalController implements Serializable {
     private void fetchAnimalData(Supplier<AnimalDto> restClientInvocation) {
         AnimalDto viewUpdatedAnimal = restClientInvocation.get();
         updateAnimalId = viewUpdatedAnimal.getAnimalId();
+        castrated = viewUpdatedAnimal.getCastrated().equals(Castrated.CASTRATED.toString());
         conversation.begin();
         conversation.setTimeout(1000 * 60 * 10);
         updateAnimalCmd = new EditAnimalCmd(
@@ -56,7 +57,7 @@ public class EditAnimalController implements Serializable {
                 viewUpdatedAnimal.getType(),
                 viewUpdatedAnimal.getAge(),
                 viewUpdatedAnimal.getName(),
-                viewUpdatedAnimal.getCastrated());
+                viewUpdatedAnimal.getCastrated().equals(Castrated.CASTRATED.toString()));
         updateAnimalDescription = viewUpdatedAnimal.getName();
     }
 
@@ -69,7 +70,8 @@ public class EditAnimalController implements Serializable {
     }
 
     public String updateAnimalById() {
-        updateAnimalCmd.setCastrated(Castrated.valueOf(forCastratedId));
+        if (isMammal())
+            updateAnimalCmd.setCastrated(isCastrated());
         return updateAnimal((updateAnimalCmd) -> animalRestClient.edit(updateAnimalId, updateAnimalCmd, group),
             () -> animalRestClient.find(updateAnimalId),
             "listAnimals");
@@ -96,12 +98,12 @@ public class EditAnimalController implements Serializable {
         }
     }
 
-    public String getForCastratedId() {
-        return forCastratedId;
+    public boolean isCastrated() {
+        return castrated;
     }
 
-    public void setForCastratedId(String forCastratedId) {
-        this.forCastratedId = forCastratedId;
+    public void setCastrated(boolean castrated) {
+        this.castrated = castrated;
     }
 
     public ArrayList<String> getCastratedTypes() {
@@ -112,4 +114,7 @@ public class EditAnimalController implements Serializable {
         this.castratedTypes = castratedTypes;
     }
 
+    public boolean isMammal() {
+        return group.equals("mammal");
+    }
 }

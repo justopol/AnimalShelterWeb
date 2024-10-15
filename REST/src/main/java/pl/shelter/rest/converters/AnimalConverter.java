@@ -19,7 +19,7 @@ public class AnimalConverter {
                 addMammalCmd.isCastrated());
     }
 
-    public static Mammal fromEditMammalCmd(EditMammalCmd editMammalCmd) {
+    public static Mammal fromEditMammalCmd(EditAnimalCmd editMammalCmd) {
         return new Mammal(editMammalCmd.getType(),
                 editMammalCmd.getAge(),
                 editMammalCmd.getName(),
@@ -76,7 +76,7 @@ public class AnimalConverter {
                 addReptileCmd.getName());
     }
 
-    public static Reptile fromEditReptileCmd(EditReptileCmd editReptileCmd) {
+    public static Reptile fromEditReptileCmd(EditAnimalCmd editReptileCmd) {
         return new Reptile(editReptileCmd.getType(),
                 editReptileCmd.getAge(),
                 editReptileCmd.getName());

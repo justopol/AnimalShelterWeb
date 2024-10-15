@@ -37,7 +37,7 @@ public class AnimalResource {
     @Path("mammal/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateMammal(@PathParam("id") UUID id,
-                             EditMammalCmd editMammalCmd) {
+                             EditAnimalCmd editMammalCmd) {
         Mammal MammalModifications = AnimalConverter.fromEditMammalCmd(editMammalCmd);
         animalService.editMammalById(id, editMammalCmd.getOriginalVersion(), MammalModifications);
     }
@@ -71,7 +71,7 @@ public class AnimalResource {
     @Path("reptile/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateReptile(@PathParam("id") UUID id,
-                             EditReptileCmd editReptileCmd) {
+                              EditAnimalCmd editReptileCmd) {
         Reptile ReptileModifications = AnimalConverter.fromEditReptileCmd(editReptileCmd);
         animalService.editReptileById(id, editReptileCmd.getOriginalVersion(), ReptileModifications);
     }

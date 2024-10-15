@@ -1,24 +1,23 @@
 package pl.shelter.dto.animals;
 
-import pl.shelter.dto.enums.Castrated;
 
 public class EditAnimalCmd extends AddAnimalCmd{
     public EditAnimalCmd() {
     }
 
     private long originalVersion;
-    private Castrated castrated;
-    public EditAnimalCmd(long originalVersion, String type, int age, String name, String castrated) {
+    private boolean castrated;
+    public EditAnimalCmd(long originalVersion, String type, int age, String name, boolean castrated) {
         super(type, age, name);
         this.originalVersion = originalVersion;
-        this.castrated = Castrated.valueOf(castrated);
+        this.castrated = castrated;
     }
 
-    public Castrated getCastrated() {
+    public boolean isCastrated() {
         return castrated;
     }
 
-    public void setCastrated(Castrated castrated) {
+    public void setCastrated(boolean castrated) {
         this.castrated = castrated;
     }
 
