@@ -8,7 +8,7 @@ public class EditAnimalCmd extends AddAnimalCmd{
     private long originalVersion;
     private boolean castrated;
     public EditAnimalCmd(long originalVersion, String type, int age, String name, boolean castrated) {
-        super(type, age, name);
+        super(type, age, name,castrated);
         this.originalVersion = originalVersion;
         this.castrated = castrated;
     }

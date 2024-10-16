@@ -118,5 +118,10 @@
             <to-view-id>/animals/editAnimal.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>createAnimal</from-outcome>
+            <to-view-id>/animals/createAnimal.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

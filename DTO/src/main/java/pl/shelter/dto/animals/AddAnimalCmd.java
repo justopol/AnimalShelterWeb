@@ -1,17 +1,19 @@
 package pl.shelter.dto.animals;
 
-public abstract class AddAnimalCmd {
+public class AddAnimalCmd {
     public AddAnimalCmd() {
     }
 
     private String type;
     private int age;
     private String name;
+    private boolean castrated;
 
-    public AddAnimalCmd(String type, int age, String name) {
+    public AddAnimalCmd(String type, int age, String name, boolean castrated) {
         this.type = type;
         this.age = age;
         this.name = name;
+        this.castrated=castrated;
     }
 
     public String getType() {
@@ -36,5 +38,13 @@ public abstract class AddAnimalCmd {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isCastrated() {
+        return castrated;
+    }
+
+    public void setCastrated(boolean castrated) {
+        this.castrated = castrated;
     }
 }

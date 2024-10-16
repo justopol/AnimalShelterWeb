@@ -33,7 +33,7 @@
                     <li><h:link outcome="createAdopter" >${msg["menu.adopter.create"]}</h:link></li>
                     <li><h:commandLink action="#{editAccountController.fetchSelfAccountData()}" >${msg["menu.account.editSelf"]}</h:commandLink></li>
                     <li><h:link outcome="listAnimals" >${msg["menu.animals.list"]}</h:link></li>
-                    <li>*Utwórz zwierzę*</li>
+                    <li><h:link outcome="createAnimal" >${msg["action.createAnimal"]}</h:link></li>
                 </ul>
             </f:subview>
             <f:subview id="adopter" rendered="#{true and request.isUserInRole('ADOPTER')}">

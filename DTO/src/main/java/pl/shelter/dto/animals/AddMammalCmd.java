@@ -7,7 +7,7 @@ public class AddMammalCmd extends AddAnimalCmd {
     }
 
     public AddMammalCmd(String type, int age, String name, boolean isCastrated) {
-        super(type, age, name);
+        super(type, age, name,isCastrated);
         this.isCastrated = isCastrated;
     }
 
