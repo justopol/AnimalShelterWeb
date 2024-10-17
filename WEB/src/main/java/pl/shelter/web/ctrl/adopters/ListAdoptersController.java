@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import pl.shelter.dto.accounts.adopters.AdopterDto;
 import pl.shelter.web.ctrl.adoptions.AdoptAnimalController;
+import pl.shelter.web.ctrl.errors.ErrorController;
 import pl.shelter.web.restclient.AdopterRestClient;
 
 import java.io.Serializable;

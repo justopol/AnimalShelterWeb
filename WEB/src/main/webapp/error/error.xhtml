@@ -20,7 +20,8 @@
             <div>
                 <div style="text-align: center;">
                     <h:messages />
-                    #{msg["error.page.message"]}
+                    #{msg["error.page.message"]}<br/><br/>
+                    <h3>#{msg["error.page.message.code"]} ${errorController.error}</h3>
                 </div>
             </div>
         </h:form>
