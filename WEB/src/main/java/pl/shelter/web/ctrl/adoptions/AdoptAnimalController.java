@@ -56,7 +56,7 @@ public class AdoptAnimalController implements Serializable {
         if(!conversation.isTransient()) conversation.end();
         conversation.begin();
         conversation.setTimeout(1000*60*10);
-        animalsForAdoption = animalRestClient.findAll();
+        animalsForAdoption = animalRestClient.findToAdoption();
     }
 
     public List<AnimalDto> getAnimalsForAdoption() {
@@ -71,9 +71,7 @@ public class AdoptAnimalController implements Serializable {
         }
         return adoptionAnimal(selectedAnimalId, (animalId) -> adoptionRestClient.adoptAnimalForAdopter(animalId, adoptioningAdopterId));
     }
-//    public String adoptionAnimalForSelf(UUID selectedAnimalId) {
-//        return adoptionAnimal(selectedAnimalId, (animalId) -> adoptionRestClient.adoptionAnimalForSelf(animalId));
-//    }
+
     private String adoptionAnimal(UUID selectedAnimalId, Consumer<UUID> adoptionClientInvocation) {
         conversation.end();
         if (null == animalsForAdoption) {

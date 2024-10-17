@@ -29,6 +29,11 @@ public class AnimalManager implements AnimalService {
     }
 
     @Override
+    public List<Animal> getForAdoptionAnimals() {
+        return animalFacade.getForAdoptionAnimals();
+    }
+
+    @Override
     public void editMammalById(UUID id, long originalVersion, Mammal mammalModifications) {
         Mammal modificateMammal = (Mammal) findAnimalById(id);
         editMammal(originalVersion, mammalModifications, modificateMammal);

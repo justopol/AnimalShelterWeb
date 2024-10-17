@@ -9,6 +9,9 @@ import pl.shelter.rest.model.enums.Bloodness;
 import java.util.UUID;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Animal.findForAdoption", query = "select a from Animal a where a.adoptionStatus = pl.shelter.rest.model.enums.AdoptionStatus.FOR_ADOPTION"),
+})
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Animal extends AbstractEntity {
     private String type;

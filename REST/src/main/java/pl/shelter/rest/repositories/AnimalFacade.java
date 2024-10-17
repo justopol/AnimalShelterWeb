@@ -1,12 +1,10 @@
 package pl.shelter.rest.repositories;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.OptimisticLockException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PersistenceException;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
+import pl.shelter.rest.model.adoptions.Adoption;
 import pl.shelter.rest.model.animals.Animal;
 
 import java.util.List;
@@ -35,6 +33,10 @@ public class AnimalFacade extends AbstractEMFacade<Animal> {
 
     public List<Animal> getAnimals() {
         return super.findAll();
+    }
+    public List<Animal> getForAdoptionAnimals() {
+        TypedQuery<Animal> tq = em.createNamedQuery("Animal.findForAdoption", Animal.class);
+        return tq.getResultList();
     }
 
     @Override

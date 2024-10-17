@@ -57,6 +57,13 @@ public class AnimalResource {
     public List<AnimalDto> getAnimal() {
         return AnimalConverter.toDto(animalService.getAnimals());
     }
+    @GET
+    @Path("for-adoption")
+    @RolesAllowed({"ADMIN","EMPLOYEE"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<AnimalDto> getForAdoptionAnimal() {
+        return AnimalConverter.toDto(animalService.getForAdoptionAnimals());
+    }
 
     @GET
     @RolesAllowed({"ADMIN","EMPLOYEE"})
