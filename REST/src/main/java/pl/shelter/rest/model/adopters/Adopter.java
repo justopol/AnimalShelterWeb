@@ -37,6 +37,10 @@ public class Adopter extends Account {
         this.address = address;
     }
 
+    @Transient
+    public int getMaxAnimals() {
+        return 5;
+    }
 
     public AdopterType getAdopterType() {
         return adopterType;

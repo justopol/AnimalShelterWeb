@@ -8,7 +8,6 @@ import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
 import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adoptions.Adoption;
-import pl.shelter.rest.model.enums.AdoptionStatus;
 import pl.shelter.rest.repositories.AdopterFacade;
 import pl.shelter.rest.repositories.AdoptionFacade;
 import pl.shelter.rest.repositories.AnimalFacade;
@@ -50,6 +49,7 @@ public class AdoptionManager implements AdoptionService{
     @Override
     public Adoption addNewAdoption(UUID adopterUuid,UUID animalUuid) throws AdoptionException {
         var adopter = adopterFacade.find(adopterUuid).orElseThrow(AppBaseException::createForEntityNotFound);
+        if(adopter.getMaxAnimals() <= adoptionFacade.countAdoptionsByAdopter(adopter)) throw AdoptionException.createForAdoptionLimitReached();
         var animal = animalFacade.find(animalUuid).orElseThrow(AppBaseException::createForEntityNotFound);
         var adoption = new Adoption();
         adoption.createAdoption(LocalDate.now(),adopter,animal);

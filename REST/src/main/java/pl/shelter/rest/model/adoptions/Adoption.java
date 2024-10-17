@@ -17,6 +17,11 @@ import java.util.UUID;
 
 @NamedQueries({
         @NamedQuery(name = "Adoption.findByLogin", query = "select a from Adoption a join Adopter d on a.adopter.id = d.id join Account c on d.id = c.id where c.login = :login"),
+        @NamedQuery(name = "Adoption.countAdoptionsByAdopter", query = "select count(a) from Adoption a where a.startAdoptionTime>= :maxDate and a.adopter = :adopter"),
+//        SELECT count(*)
+//FROM adoption as ad
+//where ad.adopter_id='61ac53c8-cbaf-4b02-a501-e9c48798b174'
+//and ad.startadoptiontime >= date(NOW() - INTERVAL '5 years')
 })
 public class Adoption extends AbstractEntity {
 

@@ -8,10 +8,10 @@ import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
-import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.model.adopters.Adopter;
 import pl.shelter.rest.model.adoptions.Adoption;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -84,6 +84,12 @@ public class AdoptionFacade extends AbstractEMFacade<Adoption> {
         query = query.where(criteria);
         TypedQuery<Adoption> tq = em.createQuery(query);
         return tq.getResultList();
+    }
+    public long countAdoptionsByAdopter(Adopter adopter) {
+        TypedQuery<Long> tq = em.createNamedQuery("Adoption.countAdoptionsByAdopter", Long.class);
+        tq.setParameter("adopter", adopter);
+        tq.setParameter("maxDate", LocalDate.now().minusYears(5));
+        return tq.getSingleResult();
     }
 
 }
