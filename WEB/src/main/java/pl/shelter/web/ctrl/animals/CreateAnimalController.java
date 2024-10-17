@@ -1,6 +1,6 @@
 package pl.shelter.web.ctrl.animals;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ConversationScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -9,14 +9,15 @@ import pl.shelter.dto.animals.AddAnimalCmd;
 import pl.shelter.web.restclient.AnimalRestClient;
 import pl.shelter.web.utils.I18nUtils;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
-@RequestScoped
+@ConversationScoped
 @Named
-public class CreateAnimalController {
+public class CreateAnimalController implements Serializable {
 
     @Inject
     private AnimalRestClient animalRestClient;
@@ -26,7 +27,7 @@ public class CreateAnimalController {
     private Map<String, String> map = AnimalType.getAnimalTypes();
 
     private Set<String> animalTypes = map.keySet();
-    private boolean castrated;
+    private boolean castrated = true;
 
     private AddAnimalCmd newAnimal = new AddAnimalCmd();
 
@@ -36,7 +37,9 @@ public class CreateAnimalController {
 
     public String createAnimal() {
         try {
-            return createAnimal(animal -> animalRestClient.createAnimal(animal));
+            newAnimal.setType(forAnimalType);
+            newAnimal.setCastrated(isCastrated());
+            return createAnimal(animal -> animalRestClient.createAnimal(animal,map.get(forAnimalType)));
         } catch (WebApplicationException wae) {
             Logger.getAnonymousLogger().severe(wae.toString());
             if (wae.getResponse().getStatus() >= 500) return "error";
@@ -82,5 +85,9 @@ public class CreateAnimalController {
 
     public void setCastrated(boolean castrated) {
         this.castrated = castrated;
+    }
+
+    public Map<String, String> getMap() {
+        return map;
     }
 }

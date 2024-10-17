@@ -103,6 +103,7 @@ public class EditAnimalController implements Serializable {
     }
 
     public void setCastrated(boolean castrated) {
+
         this.castrated = castrated;
     }
 

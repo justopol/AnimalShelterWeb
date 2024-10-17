@@ -39,8 +39,8 @@ public class AnimalRestClient extends AbstractRestClient<AnimalDto> {
         getTarget().path(group).path(String.valueOf(id)).request()
                 .put(Entity.json(editAnimalCmd));
     }
-    public void createAnimal(AddAnimalCmd newAnimal) {
-        getTarget().request(MediaType.APPLICATION_JSON)
+    public void createAnimal(AddAnimalCmd newAnimal, String group) {
+        getTarget().path(group).request(MediaType.APPLICATION_JSON)
                 .post(Entity.json(newAnimal));
     }
 

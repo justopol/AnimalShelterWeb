@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AnimalConverter {
-    public static Animal fromAddMammalCmd(AddMammalCmd addMammalCmd) {
+    public static Animal fromAddMammalCmd(AddAnimalCmd addMammalCmd) {
         return new Mammal(addMammalCmd.getType(),
                 addMammalCmd.getAge(),
                 addMammalCmd.getName(),
@@ -70,7 +70,7 @@ public class AnimalConverter {
         };
     }
 
-    public static Animal fromAddReptileCmd(AddReptileCmd addReptileCmd) {
+    public static Animal fromAddReptileCmd(AddAnimalCmd addReptileCmd) {
         return new Reptile(addReptileCmd.getType(),
                 addReptileCmd.getAge(),
                 addReptileCmd.getName());

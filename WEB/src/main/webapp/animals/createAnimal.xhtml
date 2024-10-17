@@ -22,16 +22,18 @@
                 <h:column>${msg["animal.type"]}</h:column>
                 <h:column>
                     <h:selectOneListbox size="4" id="forAnimalType"  value="#{createAnimalController.forAnimalType}">
-                        <f:selectItems value="#{createAnimalController.animalTypes}" var="animalType" itemValue="${animalType}" itemLabel="${animalType}" />
+                        <f:selectItems value="#{createAnimalController.animalTypes}" var="animalType" itemValue="${animalType}" itemLabel="${msg[animalType]}" />
                         <f:ajax render="results"/>
                     </h:selectOneListbox>
                 </h:column><br/>
                 <h:column>${msg["animal.age"]}: </h:column><h:column><h:inputText type="number" id="age" value="#{createAnimalController.newAnimal.age}"/></h:column><h:column><h:message for="age"/></h:column>
                 <h:column>${msg["animal.name"]}: </h:column><h:column><h:inputText id="name" value="#{createAnimalController.newAnimal.name}"/></h:column><h:column><h:message for="name"/></h:column>
                 <h:panelGroup id="results">
-                    <h:column rendered="#{createAnimalController.mammal}">${msg["animal.castrated"]}</h:column>
-                    <h:column rendered="#{createAnimalController.mammal}">
-                        <h:selectBooleanCheckbox value="#{createAnimalController.castrated}"/>
+<!--                    <h:column rendered="#{createAnimalController.mammal}">${msg["animal.castrated"]}</h:column>-->
+                    <h:column>${msg["animal.castrated"]}</h:column>
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{createAnimalController.castrated}">
+                        </h:selectBooleanCheckbox>
                     </h:column>
                 </h:panelGroup>
             </h:panelGrid>

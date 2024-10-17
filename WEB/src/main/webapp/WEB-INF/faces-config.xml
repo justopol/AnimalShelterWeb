@@ -123,5 +123,10 @@
             <to-view-id>/animals/createAnimal.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>listSelfAdoptions</from-outcome>
+            <to-view-id>/adopters/listSelfAdoptions.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

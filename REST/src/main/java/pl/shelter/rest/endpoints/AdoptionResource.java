@@ -25,7 +25,7 @@ public class AdoptionResource {
     }
 
     @GET
-    @RolesAllowed({"ADMIN", "EMPLOYEE"})
+    @RolesAllowed({"ADMIN", "EMPLOYEE","ADOPTER"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<AdoptionDto> getAllAdoptions(@QueryParam("includeUnderAdoption") boolean includeUnderAdoption,
                                              @QueryParam("includeAdopted") boolean includeAdopted,

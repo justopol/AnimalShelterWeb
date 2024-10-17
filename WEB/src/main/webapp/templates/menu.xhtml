@@ -39,7 +39,7 @@
             <f:subview id="adopter" rendered="#{true and request.isUserInRole('ADOPTER')}">
                 <li>${msg["ADOPTER"]}</li>
                 <ul>
-                    <li>*Lista własnych adopcji*</li>
+                    <li><h:link outcome="listSelfAdoptions" >${msg["action.listSelfAdoptions"]}</h:link></li>
                     <li><h:commandLink action="#{editAdopterController.fetchSelfAdopterData()}" >${msg["menu.account.editSelf"]}</h:commandLink></li>
                 </ul>
             </f:subview>

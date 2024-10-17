@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/MainTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="top">
+        <p>${msg["menu.adoptions.list"]}</p>
+    </ui:define>
+
+    <ui:define name="left">
+        <ui:include src="/templates/menu.xhtml" />
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages />
+        <h:form id="listSelfAdoptions">
+            <h:panelGrid columns="2" border="0">
+                <h:column>${msg["adoptions.includeUnderAdoption"]}</h:column><h:column><h:selectBooleanCheckbox id="includeUnderAdoption" value="#{listSelfAdoptionController.includeUnderAdoption}"/></h:column>
+                <h:column>${msg["adoptions.includeAdopted"]}</h:column><h:column><h:selectBooleanCheckbox id="includeAdopted" value="#{listSelfAdoptionController.includeAdopted}"/></h:column>
+                <h:column></h:column><h:column><h:commandButton value="${msg['action.refresh']}" action="#{listSelfAdoptionController.init()}"/></h:column>
+            </h:panelGrid>
+            <h:dataTable border="1" value="#{listSelfAdoptionController.adoptions}" var="adoption">
+                <h:column>
+                    <f:facet name="header">${msg["adoption.animaldata"]}</f:facet>
+                    <ui:param name="type" value="${adoption.animalType}" />
+                    ${msg[type]} ${adoption.animalName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["adoption.adoptiondate"]}</f:facet>
+                    ${msg["adoption.startTime"]}: ${adoption.startAdoptionTime}<br/>
+                    ${msg["adoption.daysElapsed"]}: ${adoption.adoptionDurationDays}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["adoption.adoptionstatus"]}</f:facet>
+                    ${msg[adoption.adoptionStatus]}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">${msg["adoption.value"]}</f:facet>
+                        ${adoption.finalAdoptionCost}
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="${msg['action.exit']}" action="main" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

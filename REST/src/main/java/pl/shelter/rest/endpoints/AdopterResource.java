@@ -75,6 +75,7 @@ public class AdopterResource {
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed({"ADOPTER"})
     public AdopterDto findSelf() {
+
         return AdopterConverter.toDto(adopterService.findAdopterSelf());
     }
 }

@@ -27,7 +27,7 @@ public class AnimalResource {
     @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("mammal")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createMammal(AddMammalCmd addMammalCmd) {
+    public void createMammal(AddAnimalCmd addMammalCmd) {
        Animal newMammal = AnimalConverter.fromAddMammalCmd(addMammalCmd);
         animalService.createAnimal(newMammal);
     }
@@ -46,7 +46,7 @@ public class AnimalResource {
     @RolesAllowed({"ADMIN","EMPLOYEE"})
     @Path("reptile")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createReptile(AddReptileCmd addReptileCmd) {
+    public void createReptile(AddAnimalCmd addReptileCmd) {
         Animal newReptile = AnimalConverter.fromAddReptileCmd(addReptileCmd);
         animalService.createAnimal(newReptile);
     }
