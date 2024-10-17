@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.ws.rs.WebApplicationException;
 import pl.shelter.dto.animals.AnimalDto;
+import pl.shelter.web.ctrl.errors.ErrorController;
 import pl.shelter.web.restclient.AdopterRestClient;
 import pl.shelter.web.restclient.AdoptionRestClient;
 import pl.shelter.web.restclient.AnimalRestClient;
@@ -34,6 +35,8 @@ public class AdoptAnimalController implements Serializable {
 
     @Inject
     private Conversation conversation;
+    @Inject
+    private ErrorController errorController;
 
 
     private UUID adoptioningAdopterId;
@@ -82,14 +85,15 @@ public class AdoptAnimalController implements Serializable {
             adoptionClientInvocation.accept(selectedAnimalId);
         } catch (WebApplicationException wae) {
             Logger.getAnonymousLogger().severe(wae.toString());
-
             if (wae.getResponse().getStatus()>=500) return "error";
-
             if (I18nUtils.isInternationalizationKeyExist(wae.getMessage())) {
+                errorController.fetchError(wae.getMessage());
                 I18nUtils.emitInternationalizedMessage(null , wae.getMessage());
                 return null;
             }
-            else return "error";
+            else{
+                errorController.fetchError(wae.getMessage());
+                return "error";}
         }
         return "success";
     }
