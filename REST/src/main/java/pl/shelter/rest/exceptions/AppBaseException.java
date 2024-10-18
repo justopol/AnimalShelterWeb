@@ -18,8 +18,6 @@ public class AppBaseException extends WebApplicationException {
     }
 
     public final static String ERROR_UNKNOWN = "ERROR.GENERAL.UNKNOWN";
-    protected final static String ERROR_DATABASE = "ERROR.GENERAL.DATABASE";
-    protected final static String ERROR_TXRETRYROLLBACK = "ERROR.GENERAL.TXRETRYROLLBACK";
     protected final static String ERROR_PERSISTANCE = "ERROR.GENERAL.PERSISTANCE";
     protected final static String ERROR_ENTITY_NOT_FOUND = "ERROR.GENERAL.ENTITY_NOTFOUND";
     protected final static String ERROR_OPTIMISTIC_LOCK = "ERROR.GENERAL.OPTIMISTIC_LOCK";
@@ -51,9 +49,6 @@ public class AppBaseException extends WebApplicationException {
         return new AppBaseException(Response.Status.INTERNAL_SERVER_ERROR, ERROR_UNKNOWN, cause);
     }
 
-    public static AppBaseException createExceptionWithTxRetryRollback() {
-        return new AppBaseException(Response.Status.CONFLICT, ERROR_TXRETRYROLLBACK);
-    }
 
     public static AppBaseException createForAuthFailed() {
         return new AppBaseException(Response.Status.UNAUTHORIZED, ERROR_AUTH_FAILED);
@@ -67,9 +62,6 @@ public class AppBaseException extends WebApplicationException {
         return new AppBaseException(Response.Status.FORBIDDEN, ERROR_ACCESS_DENIED);
     }
 
-    public static AppBaseException createForDatabaseError(DatabaseException cause) {
-        return new AppBaseException(Response.Status.NOT_ACCEPTABLE, ERROR_DATABASE, cause);
-    }
 
     public static AppBaseException createForPersistenceError(PersistenceException cause) {
         return new AppBaseException(Response.Status.NOT_ACCEPTABLE, ERROR_PERSISTANCE, cause);

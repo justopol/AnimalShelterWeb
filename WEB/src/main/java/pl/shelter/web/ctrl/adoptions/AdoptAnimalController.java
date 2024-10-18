@@ -87,12 +87,10 @@ public class AdoptAnimalController implements Serializable {
             Logger.getAnonymousLogger().severe(wae.toString());
             if (wae.getResponse().getStatus()>=500) return "error";
             if (I18nUtils.isInternationalizationKeyExist(wae.getMessage())) {
-                errorController.fetchError(wae.getMessage());
                 I18nUtils.emitInternationalizedMessage(null , wae.getMessage());
                 return null;
             }
             else{
-                errorController.fetchError(wae.getMessage());
                 return "error";}
         }
         return "success";
