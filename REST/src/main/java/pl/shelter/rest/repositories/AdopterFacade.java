@@ -2,8 +2,10 @@ package pl.shelter.rest.repositories;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import pl.shelter.rest.exceptions.AccountException;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
+import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.model.adopters.Adopter;
 
 
@@ -35,7 +37,18 @@ public class AdopterFacade extends AbstractEMFacade<Adopter> {
         return super.find(id);
     }
     public void create(Adopter adopter) {
-        super.create(adopter);
+        try {
+            super.create(adopter);
+        } catch (PersistenceException pe) {
+            if (pe.getMessage().contains(Account.DB_CONSTRAINT_UNIQUE_LOGIN)) {
+                throw AccountException.createForLoginExist(pe);
+            } else if (pe.getMessage().contains(Account.DB_CONSTRAINT_UNIQUE_EMAIL)) {
+                throw AccountException.createForEmailExist(pe);
+            } else if (pe.getMessage().contains(Account.DB_CONSTRAINT_UNIQUE_PERSONALID)) {
+                throw AccountException.createForPersonalIdExist(pe);
+            } else
+                throw AppBaseException.createForPersistenceError(pe);
+        }
     }
     @Override
     public void edit(Adopter entity) {

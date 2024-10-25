@@ -31,6 +31,7 @@
                 <h:panelGroup id="results">
 <!--                    <h:column rendered="#{createAnimalController.mammal}">${msg["animal.castrated"]}</h:column>-->
                     <h:column>${msg["animal.castrated"]}</h:column>
+<!--                    <h:column rendered="#{createAnimalController.mammal}">-->
                     <h:column>
                         <h:selectBooleanCheckbox value="#{createAnimalController.castrated}">
                         </h:selectBooleanCheckbox>

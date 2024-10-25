@@ -38,6 +38,7 @@ public class CreateAnimalController implements Serializable {
     public String createAnimal() {
         try {
             newAnimal.setType(forAnimalType);
+            var isCastrated = isCastrated();
             newAnimal.setCastrated(isCastrated());
             return createAnimal(animal -> animalRestClient.createAnimal(animal,map.get(forAnimalType)));
         } catch (WebApplicationException wae) {

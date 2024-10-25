@@ -5,8 +5,10 @@ import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import pl.shelter.rest.exceptions.AccountException;
 import pl.shelter.rest.exceptions.AppBaseException;
 import pl.shelter.rest.interceptor.TxTracked;
+import pl.shelter.rest.model.accounts.Account;
 import pl.shelter.rest.model.accounts.Employee;
 
 import java.util.List;
@@ -36,7 +38,18 @@ public class EmployeeFacade extends AbstractEMFacade<Employee> {
         return super.find(id);
     }
     public void create(Employee employee) {
-        super.create(employee);
+        try {
+            super.create(employee);
+        } catch (PersistenceException pe) {
+            if (pe.getMessage().contains(Account.DB_CONSTRAINT_UNIQUE_LOGIN)) {
+                throw AccountException.createForLoginExist(pe);
+            } else if (pe.getMessage().contains(Account.DB_CONSTRAINT_UNIQUE_EMAIL)) {
+                throw AccountException.createForEmailExist(pe);
+            } else if (pe.getMessage().contains(Account.DB_CONSTRAINT_UNIQUE_PERSONALID)) {
+                throw AccountException.createForPersonalIdExist(pe);
+            } else
+                throw AppBaseException.createForPersistenceError(pe);
+        }
     }
 
     @Override
