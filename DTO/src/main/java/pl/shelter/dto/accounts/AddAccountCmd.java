@@ -6,19 +6,19 @@ import pl.shelter.dto.ValidationMessages;
 public class AddAccountCmd {
     @NotNull
     @Pattern(regexp = "^[A-Za-z0-9]+([A-Za-z0-9]*|[._-]?[A-Za-z0-9]+)*$", message = ValidationMessages.Account.LOGIN_FORMAT)
-    @Size(min = 4, message = ValidationMessages.Account.LOGIN_LENGTH)
+    @Size(min = 4,max=100, message = ValidationMessages.Account.LOGIN_LENGTH)
     private String login;
     @NotNull
-    @Size(min = 6, message = ValidationMessages.Account.PASSWORD_LENGTH)
+    @Size(min = 6,max = 100,message = ValidationMessages.Account.PASSWORD_LENGTH)
     private String password;
     @NotNull
     @Email(message = ValidationMessages.Account.EMAIL_FORMAT)
     private String email;
     @NotNull
-    @Size(min = 2,message = ValidationMessages.Account.FIRSTNAME_LENGTH)
+    @Size(min = 2,max= 100,message = ValidationMessages.Account.FIRSTNAME_LENGTH)
     private String firstName;
     @NotNull
-    @Size(min = 2,message = ValidationMessages.Account.LASTNAME_LENGTH)
+    @Size(min = 2, max = 100,message = ValidationMessages.Account.LASTNAME_LENGTH)
     private String lastName;
     @NotNull
     @Size(min = 11, max = 11, message = ValidationMessages.Account.PERSONID_LENGTH)
