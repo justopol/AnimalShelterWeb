@@ -10,10 +10,10 @@ public class AppBaseException extends WebApplicationException {
 
     public static class AppOptimisticLockException extends AppBaseException {
         protected AppOptimisticLockException() {
-            super(Response.Status.NOT_FOUND, ERROR_OPTIMISTIC_LOCK);
+            super(Response.Status.CONFLICT, ERROR_OPTIMISTIC_LOCK);
         }
         protected AppOptimisticLockException(Throwable t) {
-            super(Response.Status.NOT_FOUND, ERROR_OPTIMISTIC_LOCK, t);
+            super(Response.Status.CONFLICT, ERROR_OPTIMISTIC_LOCK, t);
         }
     }
 
